@@ -1,0 +1,1537 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://msbinfo.com/expresslync/rct" xmlns:s1="http://msbinfo.com/expresslync/rct/valuation" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s2="http://msbinfo.com/expresslync/rct/AbstractTypes" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://msbinfo.com/expresslync/rct" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+	<wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="UTOverTransport">
+        <wsp:ExactlyOne>
+            <wsp:All>
+                <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+                    <wsp:Policy>
+                        <sp:TransportToken>
+                            <wsp:Policy>
+                                <sp:HttpsToken RequireClientCertificate="false"/>
+
+                            </wsp:Policy>
+                        </sp:TransportToken>
+                        <sp:AlgorithmSuite>
+                            <wsp:Policy>
+                                <sp:Basic256/>
+                            </wsp:Policy>
+                        </sp:AlgorithmSuite>
+                        <sp:Layout>
+                            <wsp:Policy>
+
+                                <sp:Lax/>
+                            </wsp:Policy>
+                        </sp:Layout>
+                        <sp:IncludeTimestamp/>
+                    </wsp:Policy>
+                </sp:TransportBinding>
+                <sp:SignedSupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+                    <wsp:Policy>
+                        <sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient"/>
+
+                    </wsp:Policy>
+                </sp:SignedSupportingTokens>
+            </wsp:All>
+        </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Valuation Service for Rct ExpressLync</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://msbinfo.com/expresslync/rct">
+      <s:import namespace="http://msbinfo.com/expresslync/rct/valuation" />
+      <s:element name="AddAttachmentRecordIdRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RecordId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:Attachment" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddAttachmentRecordIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:AttachmentInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddAttachmentPolicyNumberRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PolicyNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:Attachment" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddAttachmentPolicyNumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:AttachmentInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateAttachmentInfoRecordIdRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RecordId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="FileId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateAttachmentInfoRecordIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:AttachmentInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateAttachmentInfoPolicyNumberRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PolicyNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="FileId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateAttachmentInfoPolicyNumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:AttachmentInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteAttachmentRecordIdRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RecordId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="FileId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteAttachmentRecordIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="OK" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteAttachmentPolicyNumberRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PolicyNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="FileId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DeleteAttachmentPolicyNumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="OK" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListAttachmentsRecordIdRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RecordId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListAttachmentsRecordIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" ref="s1:AttachmentInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListAttachmentsPolicyNumberRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PolicyNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListAttachmentsPolicyNumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" ref="s1:AttachmentInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListAttachmentsVersionIdRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="VersionId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListAttachmentsVersionIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" ref="s1:AttachmentInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExportAttachmentRecordIdRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RecordId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="FileId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExportAttachmentRecordIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:Attachment" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExportAttachmentPolicyNumberRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PolicyNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="FileId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExportAttachmentPolicyNumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:Attachment" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValuationIn" type="s1:ValuationAggregate" />
+      <s:element name="ValuationIdentifier" type="s1:ValuationIdentifier" />
+      <s:element name="RecordId" type="s:int" />
+      <s:element name="ValuationOut" type="s1:ValuationAggregate" />
+      <s:element name="PolicyNumber" type="s:string" />
+      <s:element name="VersionId" type="s:int" />
+      <s:element name="NewPolicyNumber" type="s:string" />
+      <s:element name="OK" type="s:boolean" />
+      <s:element name="UserLogin" type="s:string" />
+      <s:element name="Address" type="s1:Address" />
+      <s:element name="StandardizedAddresses" type="tns:ArrayOfStandardizedAddress" />
+      <s:complexType name="ArrayOfStandardizedAddress">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="StandardizedAddress" type="s1:StandardizedAddress" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="EffectiveDate" type="s:date" />
+      <s:element name="RenewalDate" type="s:date" />
+      <s:element name="RenewValuationRecordIdResponse" type="tns:ArrayOfValuationAggregate" />
+      <s:complexType name="ArrayOfValuationAggregate">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Valuation" nillable="true" type="s1:ValuationAggregate" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="RenewValuationPolicyNumberResponse" type="tns:ArrayOfValuationAggregate" />
+      <s:element name="OldUserLogin" type="s:string" />
+      <s:element name="NewUserLogin" type="s:string" />
+      <s:element name="GetValuationHistoryRecordId" type="s:int" />
+      <s:element name="ValuationHistory" type="s1:ValuationHistory" />
+      <s:element name="GetValuationHistoryPolicyNumber" type="s:string" />
+      <s:element name="SeamlessSelectionRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ZipOrPostalCode" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="YearBuilt" type="s:short" />
+            <s:element minOccurs="1" maxOccurs="1" name="LivingArea" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="EstimatedMarketValue" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:SeamlessSelectionAnswerList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SeamlessSelectionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ValuationType" type="s1:ValuationType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HazardCommands" type="tns:ArrayOfString" />
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Type" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Latitude" type="s:decimal" />
+      <s:element name="Longitude" type="s:decimal" />
+      <s:element name="SearchPropertyInfoRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:Address" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchPropertyInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" ref="s1:PropertyInfoSummary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ApplyPropertyInfoRecordIdRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RecordId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="PropertyId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ApplyPropertyInfoRecordIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:ValuationAggregate" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ApplyPropertyInfoPolicyNumRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PolicyNumber" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="PropertyId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ApplyPropertyInfoPolicyNumResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:ValuationAggregate" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateValuationFromPropertyInfoRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="PropertyId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:ValuationAggregate" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateValuationFromPropertyInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:ValuationAggregate" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPropertyInfoSourceRecordRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RecordId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPropertyInfoSourceRecordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:Valuation" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPropertyInfoSourceRecordPolicyNumRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PolicyNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPropertyInfoSourceRecordPolicyNumResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:Valuation" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AttachmentInfoType" nillable="true" type="s1:AttachmentInfoType" />
+      <s:element name="boolean" type="s:boolean" />
+      <s:element name="ArrayOfAttachmentInfoType" nillable="true" type="tns:ArrayOfAttachmentInfoType" />
+      <s:complexType name="ArrayOfAttachmentInfoType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="AttachmentInfoType" nillable="true" type="s1:AttachmentInfoType" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AttachmentType" nillable="true" type="s1:AttachmentType" />
+      <s:element name="ValuationAggregate" nillable="true" type="s1:ValuationAggregate" />
+      <s:element name="ArrayOfValuationAggregate1" nillable="true" type="tns:ArrayOfValuationAggregate1" />
+      <s:complexType name="ArrayOfValuationAggregate1">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ValuationAggregate" nillable="true" type="s1:ValuationAggregate" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Valuation" nillable="true" type="s1:Valuation" />
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://msbinfo.com/expresslync/rct/valuation">
+      <s:element name="Attachment" type="s1:AttachmentType" />
+      <s:complexType name="AttachmentType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Data" type="s:base64Binary" />
+          <s:element minOccurs="0" maxOccurs="1" name="Info" type="s1:AttachmentInfoType" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="AttachmentInfoType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="FileId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="FileType" type="s1:FileTypes" />
+          <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="FileTypes">
+        <s:restriction base="s:string">
+          <s:enumeration value="BMP" />
+          <s:enumeration value="GIF" />
+          <s:enumeration value="JPG" />
+          <s:enumeration value="PDF" />
+          <s:enumeration value="TIFF" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="AttachmentInfo" type="s1:AttachmentInfoType" />
+      <s:complexType name="ValuationAggregate">
+        <s:sequence>
+          <s:choice minOccurs="1" maxOccurs="1">
+            <s:element minOccurs="0" maxOccurs="1" name="HazardValuation" type="s1:HazardValuation" />
+            <s:element minOccurs="0" maxOccurs="1" name="MMHValuation" type="s1:MMHValuation" />
+            <s:element minOccurs="0" maxOccurs="1" name="MainStreetValuation" type="s1:MainStreetValuation" />
+            <s:element minOccurs="0" maxOccurs="1" name="HVStandardValuation" type="s1:HighValueStandardValuation" />
+            <s:element minOccurs="0" maxOccurs="1" name="HVAdvancedValuation" type="s1:HighValueAdvancedValuation" />
+          </s:choice>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HazardValuation">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:Valuation" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Valuation" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ValuationIdentifier" type="s1:ValuationIdentifier" />
+          <s:element minOccurs="0" maxOccurs="1" name="RecordType" type="s1:RecordType" />
+          <s:element minOccurs="0" maxOccurs="1" name="PolicyStatus" type="s1:PolicyStatus" />
+          <s:element minOccurs="0" maxOccurs="1" name="DataSource" type="s1:DataSource" />
+          <s:element minOccurs="0" maxOccurs="1" name="PropertyAddress" type="s1:Address" />
+          <s:element minOccurs="0" maxOccurs="1" name="PropertyStandardizedAddress" type="s1:StandardizedAddress" />
+          <s:element minOccurs="0" maxOccurs="1" name="OwnerUser" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AssignedByUser" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreateDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreateUser" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UpdateDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="UpdateStatusDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="UpdateUser" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PolicyEffectiveDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="PolicyRenewalDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="EstimateExpirationDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="InsuredCustomer" type="s1:InsuredCustomer" />
+          <s:element minOccurs="0" maxOccurs="1" name="CurrentCoverageAmount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="MarketValue" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Comment" type="s1:Comment" />
+          <s:element minOccurs="0" maxOccurs="1" name="HazardInfo" type="s1:HazardInfo" />
+          <s:element minOccurs="0" maxOccurs="1" name="LatLong" type="s1:LatLongPair" />
+          <s:element minOccurs="1" maxOccurs="1" name="AttachmentCount" nillable="true" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ValuationIdentifier">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RecordId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="PolicyNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VersionId" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="RecordType">
+        <s:restriction base="s:string">
+          <s:enumeration value="EST" />
+          <s:enumeration value="POL" />
+          <s:enumeration value="INS" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="PolicyStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="In_Preparation" />
+          <s:enumeration value="Pending_Review" />
+          <s:enumeration value="Complete" />
+          <s:enumeration value="Rejected" />
+          <s:enumeration value="RenewalIP" />
+          <s:enumeration value="Superseded" />
+          <s:enumeration value="Delivered" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="DataSource">
+        <s:restriction base="s:string">
+          <s:enumeration value="BW" />
+          <s:enumeration value="DESK" />
+          <s:enumeration value="FIT" />
+          <s:enumeration value="MSHV" />
+          <s:enumeration value="RENW" />
+          <s:enumeration value="WEB" />
+          <s:enumeration value="MERG" />
+          <s:enumeration value="TES" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="Address">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Address1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StateOrProvince" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZipOrPostalCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="StandardizedAddress">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:Address">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="MatchCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="BlockCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="LocationCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="LatLong" type="s1:LatLongPair" />
+              <s:element minOccurs="0" maxOccurs="1" name="County" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="LatLongPair">
+        <s:attribute name="Latitude" type="s:decimal" use="required" />
+        <s:attribute name="Longitude" type="s:decimal" use="required" />
+      </s:complexType>
+      <s:complexType name="InsuredCustomer">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="FullName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SecondFullName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HomePhone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WorkPhone" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MailingAddressSameAsPropertyAddress" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="MailingAddress" type="s1:Address" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Comment">
+        <s:simpleContent>
+          <s:extension base="s:string">
+            <s:attribute name="Type" type="s:string" />
+          </s:extension>
+        </s:simpleContent>
+      </s:complexType>
+      <s:complexType name="HazardInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Request" type="s1:HazardRequest" />
+          <s:element minOccurs="0" maxOccurs="1" name="Result" type="s1:ArrayOfHazardResponseDetail" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HazardRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Type" type="s:string" />
+        </s:sequence>
+        <s:attribute name="UseStandardizedAddress" type="s:boolean" use="required" />
+      </s:complexType>
+      <s:complexType name="ArrayOfHazardResponseDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Detail" type="s1:HazardResponseDetail" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HazardResponseDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:choice minOccurs="1" maxOccurs="1">
+            <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Value" type="s:decimal" />
+          </s:choice>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CalculatableValuation" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:Valuation">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="CalculationResult" type="s1:CalculationResult" />
+              <s:element minOccurs="0" maxOccurs="1" name="Preferences" type="s1:Preferences" />
+              <s:choice minOccurs="1" maxOccurs="1">
+                <s:element minOccurs="0" maxOccurs="1" name="Adjustment" type="s1:Adjustment" />
+                <s:element minOccurs="0" maxOccurs="1" name="NonStandardizedCostAdjustment" type="s1:NonStandardizedCostAdjustment" />
+              </s:choice>
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="CalculationResult">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CalcUser" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="CalcDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="CostDataVersion" type="s1:CostDataVersionType" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BuildingSystemCost" type="s1:BuildingSystemCost" />
+          <s:choice minOccurs="1" maxOccurs="1">
+            <s:element minOccurs="0" maxOccurs="1" name="PrimaryStructureNonStandardizedCost" type="s1:PrimaryStructureNonStandardizedCost" />
+            <s:element minOccurs="0" maxOccurs="1" name="PrimaryStructureStandardizedCost" type="s1:PrimaryStructureStandardizedCost" />
+          </s:choice>
+          <s:choice minOccurs="1" maxOccurs="1">
+            <s:element minOccurs="0" maxOccurs="1" name="DetachedStructuresNonStandarddizedCost" type="s1:DetachedStructureNonStandardizedCost" />
+            <s:element minOccurs="0" maxOccurs="1" name="DetachedStructuresStandarddizedCost" type="s1:DetachedStructureStandardizedCost" />
+          </s:choice>
+          <s:element minOccurs="0" maxOccurs="1" name="WholeBuildingCost" type="s1:WholeBuildingCost" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CostDataVersionType">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:date" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BuildingSystemCost">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:BreakdownCostInt">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="System" type="s1:BuildingSystem" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BreakdownCostInt">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="LaborCost" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="EquipmentCost" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="MaterialCost" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="BuildingSystem">
+        <s:restriction base="s:string">
+          <s:enumeration value="Sitework" />
+          <s:enumeration value="Foundations" />
+          <s:enumeration value="SlabonGrade" />
+          <s:enumeration value="Framing" />
+          <s:enumeration value="Roofing" />
+          <s:enumeration value="ExteriorWalls" />
+          <s:enumeration value="Partitions" />
+          <s:enumeration value="WallFinishes" />
+          <s:enumeration value="FloorFinishes" />
+          <s:enumeration value="CeilingFinishes" />
+          <s:enumeration value="Equipment" />
+          <s:enumeration value="ConveyingSystems" />
+          <s:enumeration value="PlumbingSystems" />
+          <s:enumeration value="HVACSystems" />
+          <s:enumeration value="ElectricalSystems" />
+          <s:enumeration value="AttachedStructures" />
+          <s:enumeration value="DetachedStructure" />
+          <s:enumeration value="GeneralConditions" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="PrimaryStructureNonStandardizedCost">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:PrimaryStructureCost">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="GeneralContractorOverhead" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="GeneralContractorProfit" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="ArchitectFee" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="DebrisRemoval" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="PrimaryStructureCost" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:Cost">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="LaborCost" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="EquipmentCost" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="MaterialCost" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="SubTotal" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="TotalReplacementCost" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="PolicyExclusions" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="HistoricalDepreciation" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="RCLessHistoricalDepreciation" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrentCoveragePercentOfIRC" type="s:decimal" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Cost" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="InsurableReplacementCost" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="InsuredValue" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Depreciation" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Subtotal" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Adjustment" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ActualCashValue" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DetachedStructureCost" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:Cost">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="PercentOfPrimaryStructureIRC" type="s:decimal" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="DetachedStructureStandardizedCost">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:DetachedStructureCost">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="DebrisRemoval" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="SubtotalAfterDebrisRemoval" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="DetachedStructureNonStandardizedCost">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:DetachedStructureCost" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="PrimaryStructureStandardizedCost">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:PrimaryStructureCost">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="DebrisRemoval" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="SubtotalAfterDebrisRemoval" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="FinishedFloorArea" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="TotalFloorArea" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="WholeBuildingCost">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="InsurableReplacementCost" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="InsuredValue" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Preferences">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ExcavationFlag" nillable="true" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Adjustment">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GeneralPercentage" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="DepreciationChoice" type="s1:DepreciationChoice" />
+          <s:element minOccurs="0" maxOccurs="1" name="DepreciationPercentage" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="DepreciationEffectiveAge" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="WageType" type="s1:WageType" />
+          <s:element minOccurs="0" maxOccurs="1" name="DepreciationCondition" type="s1:DepreciationCondition" />
+          <s:element minOccurs="0" maxOccurs="1" name="ApplyHistoricalDepreciation" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="DepreciationChoice">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="EnteredPercentage" />
+          <s:enumeration value="EffectiveAge" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="WageType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Reconstruction" />
+          <s:enumeration value="New_Construction" />
+          <s:enumeration value="Use_Default" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="DepreciationCondition">
+        <s:restriction base="s:string">
+          <s:enumeration value="None" />
+          <s:enumeration value="Satisfactory_Minus" />
+          <s:enumeration value="Satisfactory" />
+          <s:enumeration value="Satisfactory_Plus" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="NonStandardizedCostAdjustment">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:Adjustment">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ArchitectFee" type="s1:AdjustmentParameters" />
+              <s:element minOccurs="0" maxOccurs="1" name="GeneralContractorOverhead" type="s1:AdjustmentParameters" />
+              <s:element minOccurs="0" maxOccurs="1" name="GeneralContractorProfit" type="s1:AdjustmentParameters" />
+              <s:element minOccurs="0" maxOccurs="1" name="DebrisRemoval" type="s1:AdjustmentParameters" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="AdjustmentParameters">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IncludeForValuation" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Percentage" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Cap" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MsMmhValuation" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:CalculatableValuation">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="CustomItem" type="s1:MsMmhCustomItem" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="MsMmhCustomItem">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:CustomItem">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="BreakdownCost" type="s1:BreakdownCost" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="CustomItem" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Quantity" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="UnitOfMeasure" type="s1:Unit" />
+          <s:element minOccurs="1" maxOccurs="1" name="Location" type="s1:BuildingSystem" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="Unit">
+        <s:restriction base="s:string">
+          <s:enumeration value="LF100" />
+          <s:enumeration value="SF100" />
+          <s:enumeration value="Count" />
+          <s:enumeration value="CuFt" />
+          <s:enumeration value="CuYd" />
+          <s:enumeration value="Day" />
+          <s:enumeration value="Each" />
+          <s:enumeration value="Flt" />
+          <s:enumeration value="Lbs" />
+          <s:enumeration value="LinFt" />
+          <s:enumeration value="LumpSumCost" />
+          <s:enumeration value="Mos" />
+          <s:enumeration value="SqFt" />
+          <s:enumeration value="SqYd" />
+          <s:enumeration value="Weeks" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="HighValueCustomItem">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:CustomItem">
+            <s:sequence>
+              <s:choice minOccurs="1" maxOccurs="1">
+                <s:element minOccurs="1" maxOccurs="1" name="UnitCost" type="s:decimal" />
+                <s:element minOccurs="0" maxOccurs="1" name="BreakdownCost" type="s1:BreakdownCost" />
+              </s:choice>
+              <s:element minOccurs="1" maxOccurs="1" name="CoverageType" type="s1:CoverageType" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BreakdownCost">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="LaborCost" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="EquipmentCost" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="MaterialCost" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="CoverageType">
+        <s:restriction base="s:string">
+          <s:enumeration value="A" />
+          <s:enumeration value="B" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="MainStreetValuation">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:MsMmhValuation">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Building" type="s1:MainstreetBuilding" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="MainstreetBuilding">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:MsMmhBuilding">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="NumberOfFamilies" type="s:unsignedByte" />
+              <s:element minOccurs="0" maxOccurs="unbounded" name="Section" type="s1:MainstreetSection" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="MsMmhBuilding" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:Building">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="Component" type="s1:Component" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Building" abstract="true">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SiteAccess" type="s1:SiteAccess" />
+          <s:element minOccurs="1" maxOccurs="1" name="HomeStyle" type="s1:HomeStyle" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="SiteAccess">
+        <s:restriction base="s:string">
+          <s:enumeration value="Difficult_Access_or_Steep_Terrain" />
+          <s:enumeration value="Elevator_Access" />
+          <s:enumeration value="Flat_Area__Easy_Access_Roads" />
+          <s:enumeration value="Island_Access__Long_Distance" />
+          <s:enumeration value="Island_Access__Short_Distance" />
+          <s:enumeration value="Isolated_Rural_Area" />
+          <s:enumeration value="Mountain_Region" />
+          <s:enumeration value="Narrow_or_Hillside_Area" />
+          <s:enumeration value="Slightly_Congested_Roads" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="HomeStyle">
+        <s:restriction base="s:string">
+          <s:enumeration value="Story_1" />
+          <s:enumeration value="Story_1point5" />
+          <s:enumeration value="Story_1point75" />
+          <s:enumeration value="Story_2" />
+          <s:enumeration value="Story_2point5" />
+          <s:enumeration value="Story_2point75" />
+          <s:enumeration value="Story_3" />
+          <s:enumeration value="Story_3point5" />
+          <s:enumeration value="Story_3point75" />
+          <s:enumeration value="Story_4" />
+          <s:enumeration value="Story_4point5" />
+          <s:enumeration value="Story_4point75" />
+          <s:enumeration value="Story_5" />
+          <s:enumeration value="Back_Split" />
+          <s:enumeration value="BiLevel" />
+          <s:enumeration value="Bilevel_Row_Center" />
+          <s:enumeration value="Bilevel_Row_End" />
+          <s:enumeration value="Bungalow" />
+          <s:enumeration value="Cape_Cod" />
+          <s:enumeration value="Colonial" />
+          <s:enumeration value="Condo" />
+          <s:enumeration value="Contemporary" />
+          <s:enumeration value="Cottage" />
+          <s:enumeration value="Federal_Colonial" />
+          <s:enumeration value="Mediterranean" />
+          <s:enumeration value="MultiWide" />
+          <s:enumeration value="MultiWide_StarterHome" />
+          <s:enumeration value="Ornate_Victorian" />
+          <s:enumeration value="Queen_Anne" />
+          <s:enumeration value="Raised_Ranch" />
+          <s:enumeration value="Rambler" />
+          <s:enumeration value="Ranch" />
+          <s:enumeration value="Row_House_Center" />
+          <s:enumeration value="Row_House_End" />
+          <s:enumeration value="SingleWide" />
+          <s:enumeration value="SingleWide_StarterHome" />
+          <s:enumeration value="Southwest_Adobe" />
+          <s:enumeration value="Split_Foyer" />
+          <s:enumeration value="Split_Level" />
+          <s:enumeration value="Substandard" />
+          <s:enumeration value="Townhouse_Center" />
+          <s:enumeration value="Townhouse_End" />
+          <s:enumeration value="Trilevel" />
+          <s:enumeration value="Trilevel_Row_Center" />
+          <s:enumeration value="Trilevel_Row_End" />
+          <s:enumeration value="Victorian" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="HighValueStandardBuilding">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:Building">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="Section" type="s1:HighValueStandardSection" />
+              <s:element minOccurs="0" maxOccurs="unbounded" name="Component" type="s1:Component" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="HighValueStandardSection">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:HighValueSection">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="PerimeterChoice" type="s1:PerimeterChoice" />
+              <s:element minOccurs="0" maxOccurs="1" name="Shape" type="s1:SectionShape" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="HighValueSection">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:Section">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="MeasuredPerimeter" type="s:short" />
+              <s:element minOccurs="0" maxOccurs="unbounded" name="FloorToFloorHeight" type="s1:FloorToFloorHeight" />
+              <s:element minOccurs="0" maxOccurs="unbounded" name="Component" type="s1:Component" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Section">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Number" type="s:unsignedByte" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="YearBuilt" type="s:short" />
+          <s:element minOccurs="0" maxOccurs="1" name="ContructionType" type="s1:ConstructionType" />
+          <s:element minOccurs="0" maxOccurs="1" name="NoOfStories" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="LivingArea" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ConstructionType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Standard" />
+          <s:enumeration value="Vintage" />
+          <s:enumeration value="Standard_Vintage" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="MsMmhSection" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:Section">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="PerimeterChoice" type="s1:PerimeterChoice" />
+              <s:element minOccurs="0" maxOccurs="1" name="MeasuredPerimeter" type="s:short" />
+              <s:element minOccurs="0" maxOccurs="1" name="LengthAndWidth" type="s1:LengthWidth" />
+              <s:element minOccurs="0" maxOccurs="1" name="LivingAreaEntryMethod" type="s1:LivingAreaEntryMethod" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:simpleType name="PerimeterChoice">
+        <s:restriction base="s:string">
+          <s:enumeration value="Default" />
+          <s:enumeration value="Entered" />
+          <s:enumeration value="Shape" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="LengthWidth">
+        <s:attribute name="Length" type="s:decimal" use="required" />
+        <s:attribute name="Width" type="s:decimal" use="required" />
+      </s:complexType>
+      <s:simpleType name="LivingAreaEntryMethod">
+        <s:restriction base="s:string">
+          <s:enumeration value="TotalLivingArea" />
+          <s:enumeration value="LengthxWidth" />
+          <s:enumeration value="RoomCount" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="MmhSection">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:MsMmhSection">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="FoundationAndBasement" type="s1:MmhFoundationBasementInfo" />
+              <s:element minOccurs="0" maxOccurs="unbounded" name="Framing" type="s1:MmhFramingBreakdown" />
+              <s:element minOccurs="0" maxOccurs="1" name="HingedRoof" type="s:boolean" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="MmhFoundationBasementInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PiersRaisedPct" type="s:unsignedByte" />
+          <s:element minOccurs="1" maxOccurs="1" name="BasementPct" type="s:unsignedByte" />
+          <s:element minOccurs="0" maxOccurs="1" name="BasementInfo" type="s1:BasementInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BasementInfo">
+        <s:attribute name="Type" type="s1:BasementType" />
+        <s:attribute name="PercentFinished" type="s:unsignedByte" use="required" />
+        <s:attribute name="FinishType" type="s1:BasementFinishType" use="required" />
+      </s:complexType>
+      <s:simpleType name="BasementType">
+        <s:restriction base="s:string">
+          <s:enumeration value="BelowGrade" />
+          <s:enumeration value="DaylightWalkout" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="BasementFinishType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Standard" />
+          <s:enumeration value="Custom" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="MmhFramingBreakdown">
+        <s:attribute name="Type" type="s1:MmhFramingType" use="required" />
+        <s:attribute name="Percent" type="s:unsignedByte" use="required" />
+      </s:complexType>
+      <s:simpleType name="MmhFramingType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Wood2x4" />
+          <s:enumeration value="Wood2x6" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="MainstreetSection">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:MsMmhSection">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="FoundationAndBasement" type="s1:FoundationBasementInfo" />
+              <s:element minOccurs="0" maxOccurs="1" name="Shape" type="s1:SectionShape" />
+              <s:element minOccurs="0" maxOccurs="1" name="CathedralCeilingPct" type="s:unsignedByte" />
+              <s:element minOccurs="0" maxOccurs="1" name="LowerUnfinishedPct" type="s:unsignedByte" />
+              <s:element minOccurs="0" maxOccurs="1" name="ElaborateRoof" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="unbounded" name="FloorToFloorHeight" type="s1:MSFloorToFloorHeight" />
+              <s:element minOccurs="0" maxOccurs="unbounded" name="Framing" type="s1:FramingBreakdown" />
+              <s:element minOccurs="0" maxOccurs="unbounded" name="Foundation" type="s1:FoundationBreakdown" />
+              <s:element minOccurs="0" maxOccurs="unbounded" name="Room" type="s1:Room" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="FoundationBasementInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="SlabPct" type="s:unsignedByte" />
+          <s:element minOccurs="1" maxOccurs="1" name="CrawlSpacePct" type="s:unsignedByte" />
+          <s:element minOccurs="1" maxOccurs="1" name="BasementPct" type="s:unsignedByte" />
+          <s:element minOccurs="1" maxOccurs="1" name="PiersRaisedPct" type="s:unsignedByte" />
+          <s:element minOccurs="0" maxOccurs="1" name="HillsideSlope" type="s1:HillsideSlope" />
+          <s:element minOccurs="1" maxOccurs="1" name="SuspendedOverHillsidePct" type="s:unsignedByte" />
+          <s:element minOccurs="0" maxOccurs="1" name="BasementInfo" type="s1:BasementInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="HillsideSlope">
+        <s:restriction base="s:string">
+          <s:enumeration value="ZeroToFifteen" />
+          <s:enumeration value="FifteenToThirty" />
+          <s:enumeration value="ThirtyToFortyFive" />
+          <s:enumeration value="AboveFortyFive" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="SectionShape">
+        <s:restriction base="s:string">
+          <s:enumeration value="Irregular" />
+          <s:enumeration value="Rectangular_or_Slightly_Irregular" />
+          <s:enumeration value="Square" />
+          <s:enumeration value="Very_Irregular" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="MSFloorToFloorHeight">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:FloorToFloorHeight" />
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="FloorToFloorHeight">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Percentage" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Height" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FramingBreakdown">
+        <s:attribute name="Type" type="s1:FramingType" use="required" />
+        <s:attribute name="Percent" type="s:unsignedByte" use="required" />
+      </s:complexType>
+      <s:simpleType name="FramingType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Wood2x4" />
+          <s:enumeration value="Wood2x6" />
+          <s:enumeration value="Steel" />
+          <s:enumeration value="PostAndBeam" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="FoundationBreakdown">
+        <s:attribute name="Type" type="s1:FoundationType" use="required" />
+        <s:attribute name="Percent" type="s:unsignedByte" use="required" />
+      </s:complexType>
+      <s:simpleType name="FoundationType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Stone" />
+          <s:enumeration value="Brick" />
+          <s:enumeration value="Concrete" />
+          <s:enumeration value="Block" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="Room">
+        <s:attribute name="Type" type="s1:RoomType" use="required" />
+        <s:attribute name="Size" type="s1:RoomSize" use="required" />
+        <s:attribute name="Number" type="s:unsignedByte" use="required" />
+      </s:complexType>
+      <s:simpleType name="RoomType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Kitchens" />
+          <s:enumeration value="DiningRooms" />
+          <s:enumeration value="LivingRooms" />
+          <s:enumeration value="DenStudyOffices" />
+          <s:enumeration value="Bedrooms" />
+          <s:enumeration value="HalfBaths" />
+          <s:enumeration value="FamilyRooms" />
+          <s:enumeration value="EntriesFoyers" />
+          <s:enumeration value="ExtraRooms" />
+          <s:enumeration value="MudRooms" />
+          <s:enumeration value="StorageRooms" />
+          <s:enumeration value="LaundryUtilitiesSewing" />
+          <s:enumeration value="BreakfastNooks" />
+          <s:enumeration value="BuiltinGarage" />
+          <s:enumeration value="FullBaths" />
+          <s:enumeration value="GreatRoom" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="RoomSize">
+        <s:restriction base="s:string">
+          <s:enumeration value="small" />
+          <s:enumeration value="medium" />
+          <s:enumeration value="large" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="Component">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Material" type="s:nonNegativeInteger" />
+          <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="HighValueAdvancedSection">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:HighValueSection">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Type" type="s1:SectionType" />
+              <s:element minOccurs="0" maxOccurs="1" name="Coverage" type="s1:CoverageType" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:simpleType name="SectionType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Whole_House" />
+          <s:enumeration value="Vertical_Section" />
+          <s:enumeration value="Horizontal_Ground_Floor" />
+          <s:enumeration value="Horizontal_Upper_Floor" />
+          <s:enumeration value="Basement" />
+          <s:enumeration value="Basement_Daylight" />
+          <s:enumeration value="Basement_Walkout" />
+          <s:enumeration value="Attached_Garage" />
+          <s:enumeration value="Detached_Garage" />
+          <s:enumeration value="Detached_Garage__Living_Area_Above" />
+          <s:enumeration value="Detached_Garage__Living_Area_Attached" />
+          <s:enumeration value="BuiltIn_Garage" />
+          <s:enumeration value="Basement_Garage" />
+          <s:enumeration value="Bathhouse" />
+          <s:enumeration value="Guesthouse" />
+          <s:enumeration value="Studio" />
+          <s:enumeration value="User_Defined" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="HighValueAdvancedBuilding">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:Building">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="Section" type="s1:HighValueAdvancedSection" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="MmhBuilding">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:MsMmhBuilding">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Section" type="s1:MmhSection" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="MMHValuation">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:MsMmhValuation">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Building" type="s1:MmhBuilding" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="HighValueValuation" abstract="true">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:CalculatableValuation">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="CustomItem" type="s1:HighValueCustomItem" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="HighValueAdvancedValuation">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:HighValueValuation">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Building" type="s1:HighValueAdvancedBuilding" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="HighValueStandardValuation">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:HighValueValuation">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="Building" type="s1:HighValueStandardBuilding" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="ValuationHistory">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Version" type="s1:VersionSummary" />
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PropertyInfoSummary" type="s1:PropertyInfoSummary" />
+        </s:sequence>
+        <s:attribute name="RecordId" type="s:int" use="required" />
+        <s:attribute name="PolicyNumber" type="s:string" />
+        <s:attribute name="OwnerUser" type="s:string" />
+      </s:complexType>
+      <s:complexType name="VersionSummary">
+        <s:attribute name="VersionId" type="s:int" use="required" />
+        <s:attribute name="ValuationType" type="s1:ValuationType" use="required" />
+        <s:attribute name="RecordType" type="s1:RecordType" use="required" />
+        <s:attribute name="PolicyStatus" type="s1:PolicyStatus" use="required" />
+        <s:attribute name="DataSource" type="s1:DataSource" use="required" />
+        <s:attribute name="UpdateDate" type="s:dateTime" use="required" />
+        <s:attribute name="CreateDate" type="s:dateTime" use="required" />
+        <s:attribute name="InsuredFullName" type="s:string" />
+        <s:attribute name="Attachments" type="s:string" />
+        <s:attribute name="CreateUser" type="s:string" />
+      </s:complexType>
+      <s:simpleType name="ValuationType">
+        <s:restriction base="s:string">
+          <s:enumeration value="HazardValuation" />
+          <s:enumeration value="HighValueAdvancedValuation" />
+          <s:enumeration value="HighValueStandardValuation" />
+          <s:enumeration value="MainstreetValuation" />
+          <s:enumeration value="MMHValuation" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="PropertyInfoSummary">
+        <s:complexContent mixed="false">
+          <s:extension base="s1:Address">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="PropertyId" type="s:int" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="SeamlessSelectionAnswerList" type="s1:SeamlessSelectionAnswerList" />
+      <s:complexType name="SeamlessSelectionAnswerList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Answer" nillable="true" type="s1:SeamlessSelectionAnswer" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SeamlessSelectionAnswer">
+        <s:attribute name="Key" type="s:string" />
+        <s:attribute name="Value" type="s:boolean" use="required" />
+      </s:complexType>
+      <s:element name="Address" type="s1:Address" />
+      <s:element name="PropertyInfoSummary" type="s1:PropertyInfoSummary" />
+      <s:element name="ValuationAggregate" type="s1:ValuationAggregate" />
+      <s:element name="Valuation" type="s1:Valuation" />
+    </s:schema>
+    <s:schema targetNamespace="http://msbinfo.com/expresslync/rct/AbstractTypes">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <s:complexType name="StringArray">
+        <s:complexContent mixed="false">
+          <s:restriction base="soapenc:Array">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="String" type="s:string" />
+            </s:sequence>
+          </s:restriction>
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="CreateValuationSoapIn">
+    <wsdl:part name="valuationIn" element="tns:ValuationIn" />
+  </wsdl:message>
+  <wsdl:message name="CreateValuationSoapOut">
+    <wsdl:part name="CreateValuationResult" element="tns:ValuationIdentifier" />
+  </wsdl:message>
+  <wsdl:message name="ExportValuationRecordIdSoapIn">
+    <wsdl:part name="RecordId" element="tns:RecordId" />
+  </wsdl:message>
+  <wsdl:message name="ExportValuationRecordIdSoapOut">
+    <wsdl:part name="ExportValuationRecordIdResult" element="tns:ValuationOut" />
+  </wsdl:message>
+  <wsdl:message name="ExportValuationPolicyNumberSoapIn">
+    <wsdl:part name="policyNumber" element="tns:PolicyNumber" />
+  </wsdl:message>
+  <wsdl:message name="ExportValuationPolicyNumberSoapOut">
+    <wsdl:part name="ExportValuationPolicyNumberResult" element="tns:ValuationOut" />
+  </wsdl:message>
+  <wsdl:message name="ExportValuationVersionIdSoapIn">
+    <wsdl:part name="versionId" element="tns:VersionId" />
+  </wsdl:message>
+  <wsdl:message name="ExportValuationVersionIdSoapOut">
+    <wsdl:part name="ExportValuationVersionIdResult" element="tns:ValuationOut" />
+  </wsdl:message>
+  <wsdl:message name="ExportValuationRecordIdHttpGetIn">
+    <wsdl:part name="RecordId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ExportValuationRecordIdHttpGetOut">
+    <wsdl:part name="Body" element="tns:ValuationAggregate" />
+  </wsdl:message>
+  <wsdl:message name="ExportValuationPolicyNumberHttpGetIn">
+    <wsdl:part name="policyNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ExportValuationPolicyNumberHttpGetOut">
+    <wsdl:part name="Body" element="tns:ValuationAggregate" />
+  </wsdl:message>
+  <wsdl:message name="ExportValuationVersionIdHttpGetIn">
+    <wsdl:part name="versionId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ExportValuationVersionIdHttpGetOut">
+    <wsdl:part name="Body" element="tns:ValuationAggregate" />
+  </wsdl:message>
+  <wsdl:message name="ExportValuationRecordIdHttpPostIn">
+    <wsdl:part name="RecordId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ExportValuationRecordIdHttpPostOut">
+    <wsdl:part name="Body" element="tns:ValuationAggregate" />
+  </wsdl:message>
+  <wsdl:message name="ExportValuationPolicyNumberHttpPostIn">
+    <wsdl:part name="policyNumber" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ExportValuationPolicyNumberHttpPostOut">
+    <wsdl:part name="Body" element="tns:ValuationAggregate" />
+  </wsdl:message>
+  <wsdl:message name="ExportValuationVersionIdHttpPostIn">
+    <wsdl:part name="versionId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="ExportValuationVersionIdHttpPostOut">
+    <wsdl:part name="Body" element="tns:ValuationAggregate" />
+  </wsdl:message>
+  <wsdl:portType name="ValuationServicePortSoap">
+    <wsdl:operation name="CreateValuation">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Create a new valuation.</wsdl:documentation>
+      <wsdl:input message="tns:CreateValuationSoapIn" />
+      <wsdl:output message="tns:CreateValuationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExportValuationRecordId">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Export a Valuation.  (RecordId)</wsdl:documentation>
+      <wsdl:input message="tns:ExportValuationRecordIdSoapIn" />
+      <wsdl:output message="tns:ExportValuationRecordIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExportValuationPolicyNumber">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Export a Valuation.  (PolicyNumber)</wsdl:documentation>
+      <wsdl:input message="tns:ExportValuationPolicyNumberSoapIn" />
+      <wsdl:output message="tns:ExportValuationPolicyNumberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExportValuationVersionId">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Export a Valuation.  (VersionId)</wsdl:documentation>
+      <wsdl:input message="tns:ExportValuationVersionIdSoapIn" />
+      <wsdl:output message="tns:ExportValuationVersionIdSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ValuationServicePortHttpGet">
+    <wsdl:operation name="ExportValuationRecordId">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Export a Valuation.  (RecordId)</wsdl:documentation>
+      <wsdl:input message="tns:ExportValuationRecordIdHttpGetIn" />
+      <wsdl:output message="tns:ExportValuationRecordIdHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExportValuationPolicyNumber">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Export a Valuation.  (PolicyNumber)</wsdl:documentation>
+      <wsdl:input message="tns:ExportValuationPolicyNumberHttpGetIn" />
+      <wsdl:output message="tns:ExportValuationPolicyNumberHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExportValuationVersionId">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Export a Valuation.  (VersionId)</wsdl:documentation>
+      <wsdl:input message="tns:ExportValuationVersionIdHttpGetIn" />
+      <wsdl:output message="tns:ExportValuationVersionIdHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ValuationServicePortHttpPost">
+    <wsdl:operation name="ExportValuationRecordId">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Export a Valuation.  (RecordId)</wsdl:documentation>
+      <wsdl:input message="tns:ExportValuationRecordIdHttpPostIn" />
+      <wsdl:output message="tns:ExportValuationRecordIdHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExportValuationPolicyNumber">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Export a Valuation.  (PolicyNumber)</wsdl:documentation>
+      <wsdl:input message="tns:ExportValuationPolicyNumberHttpPostIn" />
+      <wsdl:output message="tns:ExportValuationPolicyNumberHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExportValuationVersionId">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Export a Valuation.  (VersionId)</wsdl:documentation>
+      <wsdl:input message="tns:ExportValuationVersionIdHttpPostIn" />
+      <wsdl:output message="tns:ExportValuationVersionIdHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ValuationServicePortSoap" type="tns:ValuationServicePortSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateValuation">
+      <soap:operation soapAction="http://msbinfo.com/expresslync/rct:CreateValuation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ValuationServicePortSoap12" type="tns:ValuationServicePortSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CreateValuation">
+      <soap12:operation soapAction="http://msbinfo.com/expresslync/rct:CreateValuation" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExportValuationRecordId">
+      <soap12:operation soapAction="http://msbinfo.com/expresslync/rct:ExportValuation-Id" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExportValuationPolicyNumber">
+      <soap12:operation soapAction="http://msbinfo.com/expresslync/rct:ExportValuation-Num" style="document" soapActionRequired="true" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExportValuationVersionId">
+      <soap12:operation soapAction="http://msbinfo.com/expresslync/rct:ExportValuation-VersionId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ValuationServicePortHttpGet" type="tns:ValuationServicePortHttpGet">
+    <http:binding verb="GET" />   
+  </wsdl:binding>
+  <wsdl:binding name="ValuationServicePortHttpPost" type="tns:ValuationServicePortHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="ExportValuationRecordId">
+      <http:operation location="/ExportValuationRecordId" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExportValuationPolicyNumber">
+      <http:operation location="/ExportValuationPolicyNumber" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExportValuationVersionId">
+      <http:operation location="/ExportValuationVersionId" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ValuationServicePort">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Valuation Service for Rct ExpressLync</wsdl:documentation>
+    <wsdl:port name="ValuationServicePortSoap" binding="tns:ValuationServicePortSoap">
+      <soap:address location="http://rcttest3.msbexpress.net/rmmi/expresslync/ValuationService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ValuationServicePortSoap12" binding="tns:ValuationServicePortSoap12">
+      <soap12:address location="http://rcttest3.msbexpress.net/rmmi/expresslync/ValuationService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ValuationServicePortHttpGet" binding="tns:ValuationServicePortHttpGet">
+      <http:address location="http://rcttest3.msbexpress.net/rmmi/expresslync/ValuationService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ValuationServicePortHttpPost" binding="tns:ValuationServicePortHttpPost">
+      <http:address location="http://rcttest3.msbexpress.net/rmmi/expresslync/ValuationService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,127 @@
+Testsuite: org.msb.valuationservices.ValuationServicePortTest
+Tests run: 4, Failures: 0, Errors: 4, Time elapsed: 10.341 sec
+------------- Standard Error -----------------
+log4j:WARN No appenders could be found for logger (org.apache.axis2.deployment.FileSystemConfigurator).
+log4j:WARN Please initialize the log4j system properly.
+------------- ---------------- ---------------
+
+Testcase: testexportValuationVersionId took 7.192 sec
+	Caused an ERROR
+Microsoft.Web.Services3.Security.SecurityFault: Security requirements are not satisfied because the security header is not present in the incoming message.
+   at Microsoft.Web.Services3.Design.UsernameOverTransportAssertion.ServiceInputFilter.ValidateMessageSecurity(SoapEnvelope envelope, Security security)
+   at MSB.RCTExpress.Presentation.Web.UsernameOverTransportAssertion.ServiceInputFilter.ValidateMessageSecurity(SoapEnvelope envelope, Security security) in C:\Projects\MSB.RCTExpress\3.11\Presentation.Web\UsernameOverTransportNoSendNone.cs:line 27
+   at Microsoft.Web.Services3.Security.ReceiveSecurityFilter.ProcessMessage(SoapEnvelope envelope)
+   at Microsoft.Web.Services3.Pipeline.ProcessInputMessage(SoapEnvelope envelope)
+   at Microsoft.Web.Services3.WseProtocol.FilterRequest(SoapEnvelope requestEnvelope)
+   at Microsoft.Web.Services3.WseProtocol.RouteRequest(SoapServerMessage message)
+   at System.Web.Services.Protocols.SoapServerProtocol.Initialize()
+   at System.Web.Services.Protocols.ServerProtocol.SetContext(Type type, HttpContext context, HttpRequest request, HttpResponse response)
+   at System.Web.Services.Protocols.ServerProtocolFactory.Create(Type type, HttpContext context, HttpRequest request, HttpResponse response, Boolean& abortProcessing)
+org.apache.axis2.AxisFault: Microsoft.Web.Services3.Security.SecurityFault: Security requirements are not satisfied because the security header is not present in the incoming message.
+   at Microsoft.Web.Services3.Design.UsernameOverTransportAssertion.ServiceInputFilter.ValidateMessageSecurity(SoapEnvelope envelope, Security security)
+   at MSB.RCTExpress.Presentation.Web.UsernameOverTransportAssertion.ServiceInputFilter.ValidateMessageSecurity(SoapEnvelope envelope, Security security) in C:\Projects\MSB.RCTExpress\3.11\Presentation.Web\UsernameOverTransportNoSendNone.cs:line 27
+   at Microsoft.Web.Services3.Security.ReceiveSecurityFilter.ProcessMessage(SoapEnvelope envelope)
+   at Microsoft.Web.Services3.Pipeline.ProcessInputMessage(SoapEnvelope envelope)
+   at Microsoft.Web.Services3.WseProtocol.FilterRequest(SoapEnvelope requestEnvelope)
+   at Microsoft.Web.Services3.WseProtocol.RouteRequest(SoapServerMessage message)
+   at System.Web.Services.Protocols.SoapServerProtocol.Initialize()
+   at System.Web.Services.Protocols.ServerProtocol.SetContext(Type type, HttpContext context, HttpRequest request, HttpResponse response)
+   at System.Web.Services.Protocols.ServerProtocolFactory.Create(Type type, HttpContext context, HttpRequest request, HttpResponse response, Boolean& abortProcessing)
+	at org.apache.axis2.util.Utils.getInboundFaultFromMessageContext(Utils.java:531)
+	at org.apache.axis2.description.OutInAxisOperationClient.handleResponse(OutInAxisOperation.java:375)
+	at org.apache.axis2.description.OutInAxisOperationClient.send(OutInAxisOperation.java:421)
+	at org.apache.axis2.description.OutInAxisOperationClient.executeImpl(OutInAxisOperation.java:229)
+	at org.apache.axis2.client.OperationClient.execute(OperationClient.java:165)
+	at org.msb.valuationservices.ValuationServicePortStub.exportValuationVersionId(ValuationServicePortStub.java:221)
+	at org.msb.valuationservices.ValuationServicePortTest.testexportValuationVersionId(ValuationServicePortTest.java:55)
+
+Testcase: testexportValuationRecordId took 0.712 sec
+	Caused an ERROR
+Microsoft.Web.Services3.Security.SecurityFault: Security requirements are not satisfied because the security header is not present in the incoming message.
+   at Microsoft.Web.Services3.Design.UsernameOverTransportAssertion.ServiceInputFilter.ValidateMessageSecurity(SoapEnvelope envelope, Security security)
+   at MSB.RCTExpress.Presentation.Web.UsernameOverTransportAssertion.ServiceInputFilter.ValidateMessageSecurity(SoapEnvelope envelope, Security security) in C:\Projects\MSB.RCTExpress\3.11\Presentation.Web\UsernameOverTransportNoSendNone.cs:line 27
+   at Microsoft.Web.Services3.Security.ReceiveSecurityFilter.ProcessMessage(SoapEnvelope envelope)
+   at Microsoft.Web.Services3.Pipeline.ProcessInputMessage(SoapEnvelope envelope)
+   at Microsoft.Web.Services3.WseProtocol.FilterRequest(SoapEnvelope requestEnvelope)
+   at Microsoft.Web.Services3.WseProtocol.RouteRequest(SoapServerMessage message)
+   at System.Web.Services.Protocols.SoapServerProtocol.Initialize()
+   at System.Web.Services.Protocols.ServerProtocol.SetContext(Type type, HttpContext context, HttpRequest request, HttpResponse response)
+   at System.Web.Services.Protocols.ServerProtocolFactory.Create(Type type, HttpContext context, HttpRequest request, HttpResponse response, Boolean& abortProcessing)
+org.apache.axis2.AxisFault: Microsoft.Web.Services3.Security.SecurityFault: Security requirements are not satisfied because the security header is not present in the incoming message.
+   at Microsoft.Web.Services3.Design.UsernameOverTransportAssertion.ServiceInputFilter.ValidateMessageSecurity(SoapEnvelope envelope, Security security)
+   at MSB.RCTExpress.Presentation.Web.UsernameOverTransportAssertion.ServiceInputFilter.ValidateMessageSecurity(SoapEnvelope envelope, Security security) in C:\Projects\MSB.RCTExpress\3.11\Presentation.Web\UsernameOverTransportNoSendNone.cs:line 27
+   at Microsoft.Web.Services3.Security.ReceiveSecurityFilter.ProcessMessage(SoapEnvelope envelope)
+   at Microsoft.Web.Services3.Pipeline.ProcessInputMessage(SoapEnvelope envelope)
+   at Microsoft.Web.Services3.WseProtocol.FilterRequest(SoapEnvelope requestEnvelope)
+   at Microsoft.Web.Services3.WseProtocol.RouteRequest(SoapServerMessage message)
+   at System.Web.Services.Protocols.SoapServerProtocol.Initialize()
+   at System.Web.Services.Protocols.ServerProtocol.SetContext(Type type, HttpContext context, HttpRequest request, HttpResponse response)
+   at System.Web.Services.Protocols.ServerProtocolFactory.Create(Type type, HttpContext context, HttpRequest request, HttpResponse response, Boolean& abortProcessing)
+	at org.apache.axis2.util.Utils.getInboundFaultFromMessageContext(Utils.java:531)
+	at org.apache.axis2.description.OutInAxisOperationClient.handleResponse(OutInAxisOperation.java:375)
+	at org.apache.axis2.description.OutInAxisOperationClient.send(OutInAxisOperation.java:421)
+	at org.apache.axis2.description.OutInAxisOperationClient.executeImpl(OutInAxisOperation.java:229)
+	at org.apache.axis2.client.OperationClient.execute(OperationClient.java:165)
+	at org.msb.valuationservices.ValuationServicePortStub.exportValuationRecordId(ValuationServicePortStub.java:342)
+	at org.msb.valuationservices.ValuationServicePortTest.testexportValuationRecordId(ValuationServicePortTest.java:75)
+
+Testcase: testexportValuationPolicyNumber took 1.754 sec
+	Caused an ERROR
+Microsoft.Web.Services3.Security.SecurityFault: Security requirements are not satisfied because the security header is not present in the incoming message.
+   at Microsoft.Web.Services3.Design.UsernameOverTransportAssertion.ServiceInputFilter.ValidateMessageSecurity(SoapEnvelope envelope, Security security)
+   at MSB.RCTExpress.Presentation.Web.UsernameOverTransportAssertion.ServiceInputFilter.ValidateMessageSecurity(SoapEnvelope envelope, Security security) in C:\Projects\MSB.RCTExpress\3.11\Presentation.Web\UsernameOverTransportNoSendNone.cs:line 27
+   at Microsoft.Web.Services3.Security.ReceiveSecurityFilter.ProcessMessage(SoapEnvelope envelope)
+   at Microsoft.Web.Services3.Pipeline.ProcessInputMessage(SoapEnvelope envelope)
+   at Microsoft.Web.Services3.WseProtocol.FilterRequest(SoapEnvelope requestEnvelope)
+   at Microsoft.Web.Services3.WseProtocol.RouteRequest(SoapServerMessage message)
+   at System.Web.Services.Protocols.SoapServerProtocol.Initialize()
+   at System.Web.Services.Protocols.ServerProtocol.SetContext(Type type, HttpContext context, HttpRequest request, HttpResponse response)
+   at System.Web.Services.Protocols.ServerProtocolFactory.Create(Type type, HttpContext context, HttpRequest request, HttpResponse response, Boolean& abortProcessing)
+org.apache.axis2.AxisFault: Microsoft.Web.Services3.Security.SecurityFault: Security requirements are not satisfied because the security header is not present in the incoming message.
+   at Microsoft.Web.Services3.Design.UsernameOverTransportAssertion.ServiceInputFilter.ValidateMessageSecurity(SoapEnvelope envelope, Security security)
+   at MSB.RCTExpress.Presentation.Web.UsernameOverTransportAssertion.ServiceInputFilter.ValidateMessageSecurity(SoapEnvelope envelope, Security security) in C:\Projects\MSB.RCTExpress\3.11\Presentation.Web\UsernameOverTransportNoSendNone.cs:line 27
+   at Microsoft.Web.Services3.Security.ReceiveSecurityFilter.ProcessMessage(SoapEnvelope envelope)
+   at Microsoft.Web.Services3.Pipeline.ProcessInputMessage(SoapEnvelope envelope)
+   at Microsoft.Web.Services3.WseProtocol.FilterRequest(SoapEnvelope requestEnvelope)
+   at Microsoft.Web.Services3.WseProtocol.RouteRequest(SoapServerMessage message)
+   at System.Web.Services.Protocols.SoapServerProtocol.Initialize()
+   at System.Web.Services.Protocols.ServerProtocol.SetContext(Type type, HttpContext context, HttpRequest request, HttpResponse response)
+   at System.Web.Services.Protocols.ServerProtocolFactory.Create(Type type, HttpContext context, HttpRequest request, HttpResponse response, Boolean& abortProcessing)
+	at org.apache.axis2.util.Utils.getInboundFaultFromMessageContext(Utils.java:531)
+	at org.apache.axis2.description.OutInAxisOperationClient.handleResponse(OutInAxisOperation.java:375)
+	at org.apache.axis2.description.OutInAxisOperationClient.send(OutInAxisOperation.java:421)
+	at org.apache.axis2.description.OutInAxisOperationClient.executeImpl(OutInAxisOperation.java:229)
+	at org.apache.axis2.client.OperationClient.execute(OperationClient.java:165)
+	at org.msb.valuationservices.ValuationServicePortStub.exportValuationPolicyNumber(ValuationServicePortStub.java:463)
+	at org.msb.valuationservices.ValuationServicePortTest.testexportValuationPolicyNumber(ValuationServicePortTest.java:95)
+
+Testcase: testcreateValuation took 0.658 sec
+	Caused an ERROR
+Microsoft.Web.Services3.Security.SecurityFault: Security requirements are not satisfied because the security header is not present in the incoming message.
+   at Microsoft.Web.Services3.Design.UsernameOverTransportAssertion.ServiceInputFilter.ValidateMessageSecurity(SoapEnvelope envelope, Security security)
+   at MSB.RCTExpress.Presentation.Web.UsernameOverTransportAssertion.ServiceInputFilter.ValidateMessageSecurity(SoapEnvelope envelope, Security security) in C:\Projects\MSB.RCTExpress\3.11\Presentation.Web\UsernameOverTransportNoSendNone.cs:line 27
+   at Microsoft.Web.Services3.Security.ReceiveSecurityFilter.ProcessMessage(SoapEnvelope envelope)
+   at Microsoft.Web.Services3.Pipeline.ProcessInputMessage(SoapEnvelope envelope)
+   at Microsoft.Web.Services3.WseProtocol.FilterRequest(SoapEnvelope requestEnvelope)
+   at Microsoft.Web.Services3.WseProtocol.RouteRequest(SoapServerMessage message)
+   at System.Web.Services.Protocols.SoapServerProtocol.Initialize()
+   at System.Web.Services.Protocols.ServerProtocol.SetContext(Type type, HttpContext context, HttpRequest request, HttpResponse response)
+   at System.Web.Services.Protocols.ServerProtocolFactory.Create(Type type, HttpContext context, HttpRequest request, HttpResponse response, Boolean& abortProcessing)
+org.apache.axis2.AxisFault: Microsoft.Web.Services3.Security.SecurityFault: Security requirements are not satisfied because the security header is not present in the incoming message.
+   at Microsoft.Web.Services3.Design.UsernameOverTransportAssertion.ServiceInputFilter.ValidateMessageSecurity(SoapEnvelope envelope, Security security)
+   at MSB.RCTExpress.Presentation.Web.UsernameOverTransportAssertion.ServiceInputFilter.ValidateMessageSecurity(SoapEnvelope envelope, Security security) in C:\Projects\MSB.RCTExpress\3.11\Presentation.Web\UsernameOverTransportNoSendNone.cs:line 27
+   at Microsoft.Web.Services3.Security.ReceiveSecurityFilter.ProcessMessage(SoapEnvelope envelope)
+   at Microsoft.Web.Services3.Pipeline.ProcessInputMessage(SoapEnvelope envelope)
+   at Microsoft.Web.Services3.WseProtocol.FilterRequest(SoapEnvelope requestEnvelope)
+   at Microsoft.Web.Services3.WseProtocol.RouteRequest(SoapServerMessage message)
+   at System.Web.Services.Protocols.SoapServerProtocol.Initialize()
+   at System.Web.Services.Protocols.ServerProtocol.SetContext(Type type, HttpContext context, HttpRequest request, HttpResponse response)
+   at System.Web.Services.Protocols.ServerProtocolFactory.Create(Type type, HttpContext context, HttpRequest request, HttpResponse response, Boolean& abortProcessing)
+	at org.apache.axis2.util.Utils.getInboundFaultFromMessageContext(Utils.java:531)
+	at org.apache.axis2.description.OutInAxisOperationClient.handleResponse(OutInAxisOperation.java:375)
+	at org.apache.axis2.description.OutInAxisOperationClient.send(OutInAxisOperation.java:421)
+	at org.apache.axis2.description.OutInAxisOperationClient.executeImpl(OutInAxisOperation.java:229)
+	at org.apache.axis2.client.OperationClient.execute(OperationClient.java:165)
+	at org.msb.valuationservices.ValuationServicePortStub.createValuation(ValuationServicePortStub.java:584)
+	at org.msb.valuationservices.ValuationServicePortTest.testcreateValuation(ValuationServicePortTest.java:115)
+

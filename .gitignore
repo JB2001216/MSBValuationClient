@@ -1,0 +1,10 @@
+*.iws
+**/*.iws
+**/*.log
+*.log
+*.log.*
+**/*.log.*
+out/*
+*.iml
+*.ipr
+
