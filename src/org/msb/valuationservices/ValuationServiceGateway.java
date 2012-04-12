@@ -72,6 +72,16 @@ public class ValuationServiceGateway {
         return stub.createValuation(valuationInDocument);
     }
 
+    public ValuationIdentifierDocument assignPolicyNumberPolicyNumber
+            (PolicyNumberDocument policyNumberDocument, NewPolicyNumberDocument newPolicyNumberDocument) throws java.lang.Exception{
+        return stub.assignPolicyNumberPolicyNumber(policyNumberDocument, newPolicyNumberDocument);
+    }
+
+    public ValuationIdentifierDocument assignPolicyNumberRecordId
+            (RecordIdDocument recordIdDocument, NewPolicyNumberDocument newPolicyNumberDocument) throws java.lang.Exception{
+        return stub.assignPolicyNumberRecordId(recordIdDocument, newPolicyNumberDocument);
+    }
+
     public ValuationInDocument buildHazardValuation() throws java.lang.Exception {
 
         ValuationInDocument valuationIn = buildValuation();

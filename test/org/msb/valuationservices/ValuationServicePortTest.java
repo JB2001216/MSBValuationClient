@@ -68,7 +68,7 @@ public class ValuationServicePortTest extends junit.framework.TestCase {
      */
     public void testcreateValuation() throws java.lang.Exception {
 
-        org.msb.valuationservices.ValuationServiceGateway gateway = new org.msb.valuationservices.ValuationServiceGateway("cedarsprings", "c3darsprings", "http://localhost:8080/rmmi/expresslync/ValuationService.asmx");//the default implementation should point to the right endpoint
+        ValuationServiceGateway gateway = new ValuationServiceGateway("cedarsprings", "c3darsprings", "http://localhost:8080/rmmi/expresslync/ValuationService.asmx");//the default implementation should point to the right endpoint
         ValuationInDocument valuationIn = gateway.buildMainStreetValuation();
         //ValuationInDocument valuationIn = gateway.buildHighValueAdvancedValuation();
 
@@ -94,6 +94,34 @@ public class ValuationServicePortTest extends junit.framework.TestCase {
         section.setLivingArea(2200);
 
         assertNotNull(gateway.createValuation(valuationIn));
+
+    }
+
+    public void testassignPolicyNumberPolicyNumber() throws java.lang.Exception {
+
+        ValuationServiceGateway gateway = new ValuationServiceGateway("cedarsprings", "c3darsprings", "http://localhost:8080/rmmi/expresslync/ValuationService.asmx");//the default implementation should point to the right endpoint
+        PolicyNumberDocument oldPolicyNumber = PolicyNumberDocument.Factory.newInstance();
+        NewPolicyNumberDocument newPolicyNumber = NewPolicyNumberDocument.Factory.newInstance();
+
+        oldPolicyNumber.setPolicyNumber("ESTIMATE-1444173");
+        newPolicyNumber.setNewPolicyNumber("1444173");
+
+        assertNotNull(gateway.assignPolicyNumberPolicyNumber(oldPolicyNumber, newPolicyNumber));
+
+
+    }
+
+    public void testassignPolicyNumberRecord() throws java.lang.Exception {
+
+        ValuationServiceGateway gateway = new ValuationServiceGateway("cedarsprings", "c3darsprings", "http://localhost:8080/rmmi/expresslync/ValuationService.asmx");//the default implementation should point to the right endpoint
+        RecordIdDocument recordId = RecordIdDocument.Factory.newInstance();
+        NewPolicyNumberDocument newPolicyNumber = NewPolicyNumberDocument.Factory.newInstance();
+
+        recordId.setRecordId(1444173);
+        newPolicyNumber.setNewPolicyNumber("1444173");
+
+        assertNotNull(gateway.assignPolicyNumberRecordId(recordId, newPolicyNumber));
+
 
     }
 
