@@ -134,5 +134,12 @@ public class ValuationServicePortTest extends junit.framework.TestCase {
 
         return address;
     }
+
+    public void testrequestPdfReport() throws java.lang.Exception {
+
+        FastTrackValuationServiceGateway gateway = new FastTrackValuationServiceGateway("https://rcttest3.msbexpress.net/rmmi");//the default implementation should point to the right endpoint
+
+        assertEquals(gateway.requestPdfReport("c://MSBPdfs/", "1444173", "cedarsprings", "c3darsprings", "ESTIMATE-1444173"), 0);
+    }
 }
     
