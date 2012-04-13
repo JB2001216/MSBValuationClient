@@ -1,0 +1,11 @@
+<xoolForm>
+	<formTitle>tokens.installationKeyTitle</formTitle>
+  <mbean>Licence</mbean>	
+	<fields>
+		<name>installationKey</name>
+		<prompt>tokens.installationKeyPrompt</prompt>
+		<helpInfo>tokens.installationKeyHelp</helpInfo>
+		<size>20</size>
+		<type>text</type>		
+	</fields>
+</xoolForm>

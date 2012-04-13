@@ -1,0 +1,30 @@
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel='stylesheet' type='text/css' href='<script runat="server">write("http://"+request.serverName+request.contextPath+"/xadmin/stylesheets/concerto.css");</script>'> 
+<title>Concerto Universal - Runtime Error</title>
+</head>
+
+<body background='<script runat="server">write("http://"+request.serverName+request.contextPath+'/xadmin/images/bg1.gif');</script>'>
+
+<p class="heading2">A runtime error has occured executing the requested page</p>
+
+<br>
+<table>
+<script runat="server">
+writeln("<tr><td>Request URI</td><td>"+request.uri+"<td><tr>");
+writeln("<tr><td>Error Message</td><td>"+request.errmsg+"<td><tr>");
+</script>
+</table>
+<br><hr>
+<table>
+<tr><td><i><script runat="server">writeln(servlet.info);</script></i></td></tr>
+<tr><td><i>You may configure your own custom error page using the 
+<script runat="server">write("<a href='http://"+request.serverName+"/"+request.contextPath+"/xadmin/index.xsp'>administration</a>");</script>
+</i></td></tr>
+</table>
+</body>
+
+</html>

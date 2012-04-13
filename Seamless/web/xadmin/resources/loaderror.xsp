@@ -1,0 +1,44 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel='stylesheet' type='text/css' href='<script runat="server">write("http://"+request.serverName+request.contextPath+"/xadmin/stylesheets/concerto.css");</script>'> 
+<title>Concerto Servlet - Load Error Page</title>
+</head>
+
+<body background='<script runat="server">write("http://"+request.serverName+request.contextPath+'/xadmin/images/bg1.gif');</script>'>
+
+<h2 class="heading2">Unable to load the requested page</h2>
+<br>
+<table>
+<script runat="server">
+
+if (request.realuri != null && request.realpath != null && request.realuri == request.realpath) {
+  writeln("<tr><td>Requested URI</td><td>"+request.realuri+"<td><tr>");
+}
+else {
+  if (request.realuri != null) {
+    writeln("<tr><td>Real URI</td><td>"+request.realuri+"<td><tr>");
+  }
+  if (request.realpath != null) {
+    writeln("<tr><td>Real Path</td><td>"+request.realpath+"<td><tr>");
+  }
+}
+
+writeln("<tr><td>Error Message</td><td>"+request.errmsg+"<td><tr>");
+
+</script>
+
+</table>
+
+<br>
+<hr>
+<table>
+<tr><td><i><script runat="server">writeln(servlet.info);</script></i></td></tr>
+<tr><td><i>You may configure your own custom error page using the 
+<script runat="server">write("<a href='http://"+request.serverName+"/"+request.contextPath+"/xadmin/index.xsp'>administration</a>");</script>
+</i></td></tr>
+</table>
+</body>
+
+</html>

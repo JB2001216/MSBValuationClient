@@ -1,0 +1,30 @@
+<xoolForm>
+  <formTitle>tokens.fileUploadTitle</formTitle>
+  <mbean>FileUpload</mbean>
+  <fields>
+		<name>fileUploadClearFileOnPageExit</name>
+		<prompt>tokens.fileUploadClearFileOnPageExitPrompt</prompt>
+		<helpInfo>tokens.fileUploadClearFileOnPageExitHelp</helpInfo>
+		<type>checkbox</type>
+  </fields>
+  <fields>
+		<name>fileUploadClearTmpDirOnStartup</name>
+		<prompt>tokens.fileUploadClearTmpDirOnStartupPrompt</prompt>
+		<helpInfo>tokens.fileUploadClearTmpDirOnStartupHelp</helpInfo>
+		<type>checkbox</type>
+  </fields>
+  <fields>
+		<name>fileUploadMaxSize</name>
+		<prompt>tokens.fileUploadMaxSizePrompt</prompt>
+		<helpInfo>tokens.fileUploadMaxSizeHelp</helpInfo>
+		<size>10</size>
+		<type>text</type>
+  </fields>
+  <fields>
+		<name>fileUploadTempDir</name>
+		<prompt>tokens.fileUploadTempDirPrompt</prompt>
+		<helpInfo>tokens.fileUploadTempDirHelp</helpInfo>
+		<size>60</size>
+		<type>text</type>
+  </fields>
+</xoolForm>

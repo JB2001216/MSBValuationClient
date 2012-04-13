@@ -1,0 +1,84 @@
+ <script runat="server">
+/**
+ * file: seamless.xsp
+ * created: 4.13.2012
+ *
+ * This file handles user requests for accessing the MSB Fast Track product.
+ *
+ ***********************************************************************************/
+
+
+
+ </script>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+<head>
+
+<style type="text/css">
+body { background-color:#ffffff; margin:0; padding:0; width:100%; }
+div#topImg { background-color: #000000; }
+
+</style>
+
+<title>Seamless Login/HO Valuation</title>
+
+<script type"text/javascript" src="xactware.js"></script>
+
+</head>
+
+<body>
+
+<div id="topImg">
+<!-- <img src="../images/logo_header_white.gif" /><br />
+<img src="../images/tools.jpg" width="100%" height="140px" /><br /> -->
+</div>
+Hello
+<!-- <script runat="server">
+
+writeln('<h2 style="text-align:center;">Please wait while your request is processed...</h2>');
+
+// build the form we'll use to make the request for a seamless login
+var bCmc = (sValType == 'UNKNOWN') ? false : true;
+fXactware.buildForm(sUrlDomain, bNewValuation, bCmc);
+
+// if everything has succeeded and we can submit the form to 360, do it
+if (bOkToSubmit && !bFatalError) {
+  // give the user a button to click, generally this would only be for development/testing
+  //writeln('<input type="button" onclick="document.sso.submit();" value="Submit" name="newValuation" tabindex="1" />');
+
+  //create a javascript event to submit the form
+  writeln('<script type="text/javascript">');
+  writeln('document.onload = document.sso.submit();');
+  writeln('</sc'+'ript>');
+}
+// else, dump everything into the log for troubleshooting...
+else {
+  fPhenix.writeFile(sLogFileName,'Unable to complete seamless login process.');
+  if (bQuoteRequest) {
+    fPhenix.writeFileNo(sLogFileName, "%% sPolicyId=" + sPolicyId + "; sUserId=" + sUserId + "; sRoleOne=" + sRoleOne + "; sUserFirst=" + sUserFirst + "; sUserLast=" + sUserLast + "; sInsFirst=" + sInsFirst + "; sInsLast=" + sInsLast + '\n');
+  }
+  else {
+    if (fPhenix.get("sClientCompName")) {
+      sClientName = fPhenix.get("sClientCompName");
+    }
+    else {
+      sClientName = fPhenix.get("sClientName");
+      var iTemp = sClientName.lastIndexOf(" ");
+      sInsFirst = sClientName.substring(0, iTemp);
+      sInsLast = sClientName.substring(iTemp + 1);
+    }
+    fPhenix.writeFileNo(sLogFileName, "sPolicyId=" + sPolicyId + "; sUserId=" + sUserId + "; sRoleOne=" + sRoleOne + "; sUserFirst=" + sUserFirst + "; sUserLast=" + sUserLast + "; sClientName=" + sClientName + "; sInsFirst=" + sInsFirst + "; sInsLast=" + sInsLast + '\n');
+  }
+  fPhenix.writeFileNo(sLogFileName, 'sRawSeamless = ' + sRawSeamless + '\n');
+}
+
+// close the form
+writeln('</form>');
+writeln('</body>');
+
+</script> -->
+</body>
+</html>

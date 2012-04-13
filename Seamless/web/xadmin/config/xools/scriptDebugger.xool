@@ -1,0 +1,32 @@
+<xoolForm>
+  <formTitle>tokens.scriptDebuggerTitle</formTitle>
+  <mbean>ScriptDebugger</mbean>  
+  <fields>
+		<name>scriptDebuggerEnabled</name>
+		<prompt>tokens.scriptDebuggerEnabledPrompt</prompt>
+		<helpInfo>tokens.scriptDebuggerEnabledHelp</helpInfo>
+		<type>checkbox</type>
+  </fields>
+  <fields>
+		<name>scriptDebuggerHostsAllowed</name>
+		<prompt>tokens.scriptDebuggerHostsAllowedPrompt</prompt>
+		<helpInfo>tokens.scriptDebuggerHostsAllowedHelp</helpInfo>
+		<type>table</type>
+		<columns>
+		  <name>scriptDebuggerClient</name>
+		  <prompt>tokens.scriptDebuggerClientPrompt</prompt>
+		  <helpInfo>tokens.scriptDebuggerClientHelp</helpInfo>
+		  <size>20</size>
+		  <type>text</type>
+		</columns>
+		<tableAddText>tokens.tableAddText</tableAddText>
+		<tableRemoveText>tokens.tableRemoveText</tableRemoveText>
+  </fields>
+  <fields>
+		<name>scriptDebuggerPort</name>
+		<prompt>tokens.scriptDebuggerPortPrompt</prompt>
+		<helpInfo>tokens.scriptDebuggerPortHelp</helpInfo>
+		<size>10</size>
+		<type>text</type>
+  </fields>
+</xoolForm>

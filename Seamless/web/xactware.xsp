@@ -1,0 +1,226 @@
+<script runat="server">
+
+/**
+ * Created: 1.15.2009
+ * Last updated: 2.27.2009
+ *
+ * Library needed for the xactware 360-value valuation tool
+ */
+
+  /////////////////
+ // Constructor //
+////////////////
+function xactware() {
+
+	// inherit the phenix_home fragment
+	this.fPhenix = new Fragment("fragments/phenix_home.js");
+	this.fConfig = new Fragment("config.js");
+
+	// public methods
+	this.buildForm = buildForm;
+	//this.getDomain = getDomain;
+	this.getNewValId = getNewValId;
+	this.hdnFormVar = hdnFormVar;
+	this.parseNewValIdFromXml = parseNewValIdFromXml;
+	this.parseExistingValuationXml = parseExistingValuationXml;
+	this.policyType = policyType;
+	this.ticketDate = ticketDate;
+	this.trim = trim;
+
+	//public properties
+	this.sNewValId = '';
+	this.sNewValIdStatus = '';
+	this.sExistValIdStatus = '';
+
+	// public constants
+	this.GROUP_ID = "5435888";
+	this.SHARED_SECRET = "cm3SU0yJ";
+	//this.DOMAIN_360_DEV = "https://test.xactvalue.com";
+	//this.DOMAIN_360_PROD = "https://www.360-value.com";
+	// access these values from a local config file to prevent prod users from accidentally accessing test environment
+	this.DOMAIN_360_DEV = fConfig.sUrlDev;
+	this.DOMAIN_360_PROD = fConfig.sUrlProd;
+
+}
+
+  ////////////////////
+ // Public methods //
+////////////////////
+
+function buildForm(sUrlDomain, bNewValuation, bCmc) {
+	// start building the form - set a different action for dev/testing than for production
+	var sAction = sUrlDomain + "/apps/iv/Login";
+
+	writeln('<form method="post" name="sso" action="' + sAction + '">');
+	commonFormFields();
+
+	if (bNewValuation) {
+		hdnFormVar("owner_name", sInsFirst + ' ' + sInsLast);
+		hdnFormVar("owner_address", sInsStreet);
+		hdnFormVar("owner_city", sInsTown);
+		hdnFormVar("owner_state", sInsState);
+		hdnFormVar("owner_zip", sInsZip);
+		hdnFormVar("val_type", sValType);		// Note: val_type must be included for the user to bypass the basic info screen of the 360 system
+		hdnFormVar("val_valuationid", sValuationId);
+		hdnFormVar("owner_policynumber", sPolicyId);
+
+		//extra fields for commerical policies
+		if (bCmc) {
+			hdnFormVar("property_name", sPropName);
+			hdnFormVar("property_address", sPropAddr);
+			hdnFormVar("property_city", sPropCity);
+			hdnFormVar("property_state", sPropState);
+			hdnFormVar("property_zip", sPropZip);
+			hdnFormVar("property_contact", sContactFName + " " + sContactLName);
+			hdnFormVar("property_email", sEmail);
+			hdnFormVar("property_phone", sPhone);
+		}
+	}
+	else {
+		hdnFormVar("nav_valuationid", sValuationId);
+	}
+
+}
+
+
+/***** Find out if we are in dev or production by checking the url serverName request object contains the subString "phenixmutual.com" *****/
+/*
+function getDomain(sServerName) {
+	var sDomain = (sServerName.indexOf("phenix") == -1 && sServerName.indexOf("192.168.1.253") == -1) ? this.DOMAIN_360_DEV : this.DOMAIN_360_PROD;
+	return sDomain;
+}
+*/
+
+// write out a hidden var to the page
+function hdnFormVar(name, value) {
+	writeln('<input name="' + name + '" value="' + value + '" type="hidden" />');
+}
+
+
+/**
+ * @param: sXml= the full xml formatted string returned from the 360 HndTransfer service
+ */
+function parseNewValIdFromXml (sXml) {
+
+	var oXmlParser = new XMLParser();
+	//var sValId = oXmlParser.addHandler("VAL", val_success);
+	oXmlParser.addHandler("RESPONSE", val_status);
+	oXmlParser.addHandler("VAL", val_success);
+	oXmlParser.addHandler("VALRESPONSE", val_status);
+	oXmlParser.parseString(sXml, "/");
+}
+
+
+function parseExistingValuationXml(oXml) {
+	var oXmlParser = new XMLParser();
+	oXmlParser.addHandler("VALRESPONSE", val_id_status);
+	oXmlParser.parseString(oXml, "/");
+	//this.sExistValIdStatus = 3;
+}
+
+// this method runs a task and returns a value indicating if this quote/policy is a commercial or personal line
+function policyType(sPolicyId) {
+	var sTempTask = fPhenix.tRunTask("TK_RC_POLICY_TYPE", Array("RC_POLICY_NUMBER"), Array(sPolicyId));	// run the task
+	if (sTempTask.error) { fPhenix.handleTaskError(sTempTask, Array("RC_POLICY_NUMBER"), Array(sPolicyId), '', '', true); }	//handle task error
+	var sPolType = (sTempTask.parameters.RC_PERSONAL_COMMERCIAL_ID == 'C') ? 'COMMERCIAL' : 'UNKNOWN';
+	sTempTask = null;
+	return sPolType;
+}
+
+
+// The requests we send to 360 require a date string formatted like this: YYYY-MM-DDTHH:MM:SS (where "T" is a literal string value separating the date from the time)
+function ticketDate() {
+	var now = new Date();
+	var GMT_DIFF = 5;	// timezone differential between us and GMT
+	var dTemp = new Date(now.getYear(), now.getMonth(), now.getDate(), now.getHours()+ GMT_DIFF, now.getMinutes(), now.getSeconds());
+
+	var ticketDate = dTemp.getYear() + "-";
+	ticketDate += ((dTemp.getMonth()+1) < 10) ? ("0" + (dTemp.getMonth() + 1)) : (dTemp.getMonth() + 1);
+	ticketDate += "-";
+	ticketDate += ((dTemp.getDate() < 10) ? ("0" + dTemp.getDate())  : (dTemp.getDate()));
+	ticketDate += "T" + dTemp.getHours() + ":";
+	ticketDate += ((dTemp.getMinutes()*1) < 10) ? ("0" + dTemp.getMinutes() + ":") : (dTemp.getMinutes() + ":");
+	ticketDate += ((dTemp.getSeconds()*1) < 10) ? ("0" + dTemp.getSeconds()) : dTemp.getSeconds();
+
+	return ticketDate;
+}
+
+
+//Trim leading and trailing whitespace from string
+function trim( str ) {
+  var strTmp = new String( str );
+
+  if ( strTmp.length > 0 ) {
+	// this will get rid of leading spaces
+    while ( strTmp.substring( 0, 1 ) == ' ' )
+	  strTmp = String( strTmp.substring( 1, strTmp.length ) );
+
+    // this will get rid of trailing spaces
+	while (strTmp.substring(strTmp.length-1,strTmp.length) == ' ')
+	  strTmp = String( strTmp.substring( 0, strTmp.length-1 ) );
+  }
+
+  return strTmp;
+}
+
+////////////////////////////////////////////////
+// Private methods                            //
+////////////////////////////////////////////////
+
+// handler function for parsing a successful new valuation id xml response
+function val_success(val) {
+	var valAtts = val.getAttributes();
+	for (att in valAtts) {
+		if (att == "valuationid") { this.sNewValId = (valAtts[att]); }
+	}
+}
+
+// handler function for parsing an usuccessful new valuation id xml response
+function val_status(val) {
+	var valAtts = val.getAttributes();
+	for (att in valAtts) {
+		if (att == "status") {
+			this.sNewValIdStatus = (valAtts[att]);
+			break;
+		}
+	}
+}
+
+// this handler method runs on the response when we request a report for an existing valuation id to determine if the valuation actually exists in the 360 system
+function val_id_status(val) {
+	var valAtts = val.getAttributes();
+	for (att in valAtts) {
+		if (att == "status") { this.sExistValIdStatus = (valAtts[att]); }
+	}
+}
+
+function commercialForm() {
+	hdnFormVar("property_name", sPropName);
+	hdnFormVar("property_address", sPropAddress);
+	hdnFormVar("property_city", sPropCity);
+	hdnFormVar("property_state", sPropState);
+	hdnFormVar("property_zip", sPropZip);
+	hdnFormVar("property_contact", sPropContact);
+	hdnFormVar("property_email", sPropEmail);
+	hdnFormVar("property_phone", sPropPhone);
+}
+
+/**
+ * All seamless login processes require certain these fields to be posted.
+ */
+function commonFormFields() {
+	// Access ticket parameters
+	hdnFormVar("ticket_hash", sHashSeamless);
+	hdnFormVar("ticket_date", sTicketDate);
+	hdnFormVar("ticket_userid", sUserId);
+	hdnFormVar("ticket_groupid", this.GROUP_ID);
+
+	// User create/update parameters
+	hdnFormVar("role_role", sRole);
+	if (sRole == 'agent') // for the agent role, we have to send the role_ol1 parameter also
+		hdnFormVar("role_ol1", sRoleOne);
+	hdnFormVar("user_firstname", sUserFirst);
+	hdnFormVar("user_lastname", sUserLast);
+
+}
+</script>

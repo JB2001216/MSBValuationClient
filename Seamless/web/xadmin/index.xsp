@@ -1,0 +1,19 @@
+<head><title>Concerto Universal Administration Console</title></head>
+<script runat="server">
+	writeln('<frameset rows="70,*,72">');
+  writeln('  <frameset cols="200,*">');
+  writeln('    <frame src="framework/topLeft.xsp" name="_TOPLEFT" frameborder="0" scrolling="No" noresize marginwidth="0" marginheight="0" framespacing="0">');
+  writeln('    <frame src="framework/topMid.xsp" name="_TOPMID" frameborder="0" scrolling="auto" noresize marginwidth="0" marginheight="0" framespacing="0">');
+  writeln('  </frameset>');
+	writeln('  <frameset cols="180,*">');
+  writeln('    <frame src="framework/leftMid.xsp" name="_SUBMENU" frameborder="1" scrolling="auto" noresize marginwidth="0" marginheight="0" framespacing="0">');
+  writeln('    <frame backgroundcolor=gray src="framework/main.xsp" name="_CMAIN" frameborder="1" scrolling="auto" noresize marginwidth="15" marginheight="15" framespacing="0">');  
+  writeln('  </frameset>');
+	writeln('  <frameset cols="180,*">')
+  writeln('    <frame src="framework/leftBottom.xsp" name="_BOTTOMLEFT" frameborder="0" scrolling="No" noresize marginwidth="0" marginheight="0" framespacing="0">');
+  writeln('    <frame src="framework/midBottom.xsp" name="_BOTTOMMID" frameborder="0" scrolling="No" noresize marginwidth="0" marginheight="0" framespacing="0">');
+	writeln('  </frameset>');
+  writeln('</frameset>');
+</script>
+<noframes>You need IE5.0 or Netscape 6.0</noframes>
+<frame>

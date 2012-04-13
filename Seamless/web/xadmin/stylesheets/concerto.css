@@ -1,0 +1,153 @@
+BODY {
+	font-variant : normal;
+	font-weight : normal;
+	  font-family : sans-serif;
+  font-size : small;
+  font-style : normal;
+  color : Black;
+
+}
+
+a.mainOne {
+	font-weight: bold;
+	color : #000000;
+	font-style : normal;
+	font-variant : normal;
+	text-decoration : none;
+	font-size : 12px;
+	font-family : Verdana;
+}
+a.mainOne:hover {
+	color : orange;
+}
+
+a.subMenu {
+	font-weight: bold;
+	color : #000000;
+	font-style : normal;
+	font-variant : normal;
+	text-decoration : none;
+	font-size : 12px;
+	font-family : Verdana;
+}
+a.subMenu:hover {
+	color : orange;
+}
+
+
+.heading1 {
+	font-family : sans-serif;
+	font-size : medium;
+	font-style : normal;
+	font-weight : bold;
+	color : Purple;
+}
+.heading2 {
+	font-family : sans-serif;
+	font-size : small;
+	font-style : normal;
+	font-weight : bold;
+	color : Purple;
+}
+.heading3 {
+	font-family : sans-serif;
+	font-size : x-small;
+	font-style : normal;
+	font-weight : bold;
+	color : Black;
+}
+.prompt {
+	font-family : sans-serif;
+	font-size : x-small;
+	font-style : normal;
+	font-weight : bold;
+	color : Black;
+}
+.prompt A:LINK {
+	font-family : sans-serif;
+	font-size : x-small;
+	font-style : normal;
+	font-weight : bold;
+	color : Maroon;
+}
+.prompt A:HOVER {
+  font-family : sans-serif;
+  font-size : x-small;
+  font-style : normal;
+  font-weight : bold;
+  color : Maroon;
+}
+.prompt A:VISITED {
+  font-family : sans-serif;
+  font-size : x-small;
+  font-style : normal;
+  font-weight : bold;
+  color : Maroon;
+}
+.prompt A:ACTIVE {
+  font-family : sans-serif;
+  font-size : x-small;
+  font-style : normal;
+  font-weight : bold;
+  color : Maroon;
+}
+.text1 {
+  font-family : sans-serif;
+  font-size : medium;
+  font-style : normal;
+  color : Black;
+}
+.text2 {
+  font-family : sans-serif;
+  font-size : small;
+  font-style : normal;
+  color : Black;
+}
+table.text2 {
+  font-family : sans-serif;
+  font-size : small;
+  font-style : normal;
+  color : Black;
+}
+.text3 {
+  font-family : sans-serif;
+  font-size : x-small;
+  font-style : normal;
+  color : Black;
+}
+.selected {
+	font-family : sans-serif;
+	font-size : x-small;
+	font-style : normal;
+	color : White;
+	font-weight : bold;
+	background-color : Black;
+}
+.linkbold {
+	font-family : sans-serif;
+	font-size : x-small;
+	font-style : normal;
+	color : Maroon;
+	font-weight : bold;
+}
+.text {
+  font-family : sans-serif;
+  font-size : x-small;
+  font-style : normal;
+  color : Black;
+}
+.textbold {
+  font-family : sans-serif;
+  font-size : x-small;
+  font-style : normal;
+  color : Black;
+  font-weight : bold;
+}
+.error {
+  font-family : sans-serif;
+  font-size : x-small;
+  font-style : normal;
+  font-weight : bold;
+  color : Red;
+}
+

@@ -1,0 +1,17 @@
+<resources>
+  <collection type="web">
+    <heading></heading>
+    <resource>
+      <title>$tokens.resources_downloads</title>
+      <url>http://www.proiv.com/p4web/home/products/concertoLinks/concertoDownload.xsp</url>
+      <target>web0</target>
+    </resource>
+    <resource>
+      <title>$tokens.resources_forums</title>
+      <url>http://www.proiv.com/p4web/home/products/concertoLinks/forums.xsp</url>
+      <target>web1</target>
+    </resource>
+  </collection>
+</resources>
+
+

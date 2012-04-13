@@ -1,0 +1,172 @@
+<script runat="server">
+/**
+ * Filename: seamless_logout.xsp
+ * Created: 2.17.2009
+ * Modified:
+ *
+ * When the user is done in the 360 system, if they click the redirect button, 360 will redirect the user to this page.
+ * The redirection url querystring will contain the valuation id and valuation cost.
+ */
+
+var sPolicyId = '';
+var sTown, sState, sZip = '';
+
+var dToday = new Date();
+var sLogFileName = 'logs/valuation' + dToday.getFullYear() + (dToday.getMonth() + 1) + '.log';
+
+// First thing first, grab the valuation id and cost from the request object
+var sValId = request['360_valuationid'];
+var sValCost = request['360_rcv'];
+
+// create the fragment objects for this page
+var fXactware = new Fragment("xactware.xsp");
+var fConfig = fXactware.fConfig;
+var fPhenix = fXactware.fPhenix;
+
+// instantiate the java class
+var jXactware = new com.phenix.xactware.Xactware();
+
+// create a separator in the log file
+fPhenix.writeFile(sLogFileName, "\n\n" + "***************************************");
+var valuationLog = fPhenix.writeFileNo(sLogFileName, "Attempting to process and download valuation report. Valuation ID = " + sValId + ", cost = " + sValCost);
+
+// pass the cost into the update task
+var tValuationComplete = fPhenix.tRunTask("TK_RC_UPDATE", Array("RC_VALUATION_ID", "RC_COST_NUMBER", "RC_POLICY_NUMBER"), Array(sValId, sValCost, sPolicyId));
+// check for  task error
+if (tValuationComplete.error) {
+	// log the error
+	fPhenix.handleTaskError(tValuationComplete, Array("RC_VALUATION_ID", "RC_COST_NUMBER", "RC_POLICY_NUMBER"), Array(sValId, sValCost, sPolicyId), '', '', true);
+}
+// else no error, so proceed...
+else {
+	/**************************************************************************************************
+	/ If the update ran successfully, run the lookup task to grab the info we'll need to rename
+	/ the valuation report pdf to the ImageRight COLD import format.
+	***************************************************************************************************/
+
+	// Grab the policy id from the update to execute the lookup and retrieve the property location data.
+	sPolicyId = tValuationComplete.parameters.RC_POLICY_NUMBER;
+
+	// pass the cost into the update task
+	var tValuationLookup = fPhenix.tRunTask("TK_RC_LOOKUP", Array("RC_POLICY_NUMBER"), Array(sPolicyId));
+	// check for  task error
+	if (tValuationLookup.error) {
+		// log the error
+		fPhenix.handleTaskError(tValuationLookup, Array("RC_POLICY_NUMBER"), Array(sPolicyId), '', '', true);
+	}
+	else {	// else no error, so get task output parms...
+		sTown = tValuationLookup.parameters.RC_TOWN;
+		sState = tValuationLookup.parameters.RC_STATE;
+		sZip = tValuationLookup.parameters.RC_ZIP_CODE;
+	}
+}
+
+
+// Find out which environment we're in so we can build the url strings/form methods properly
+var sUrlDomain = fConfig.sUrl;
+
+//grab the date string we need for the form and the hash string
+var sTicketDate = fXactware.ticketDate();
+
+// BUILD THE ENCRYPTED STRING NEEDED BY THE 360 SERVER TO AUTHENTICATE THE REQUEST
+// build the authentication string - don't need role_* or user_* since we're using group_id as the user_id
+var sRaw = fXactware.SHARED_SECRET + "|" + fXactware.GROUP_ID + "|" + fXactware.GROUP_ID + "|" + sTicketDate + "|" + "|" + "|" + "|" + "|" + "|" + "|" + "|" + "|";
+// encrypt the authentication string
+var sHash = jXactware.convertHexToShaOne(sRaw);
+
+// XML reports are not being downloaded here, supposedly this is/will be done directly from data base server...
+// Request the xml report
+//var sXmlReport = jXactware.requestXmlReport (sUrlDomain, sHash, sTicketDate, sValId, fXactware.GROUP_ID);
+//write the xml file to the reports directory
+//fPhenix.writeFile("reports/" + sValId + ".xml", sXmlReport, "w", "UTF-8");
+
+// Request the pdf report - method returns 0 for success
+var pdfStatus = jXactware.requestPdfReport (sUrlDomain, sHash, sTicketDate, sValId, fXactware.GROUP_ID);
+
+// this link is to view the pdf from the 360 server
+var sPdfReportUrl = sUrlDomain + "/apps/iv/HndTransfer?ticket_hash=" + sHash + "&ticket_date=" + sTicketDate + "&ticket_groupid=" + fXactware.GROUP_ID + "&ticket_userid=" +  fXactware.GROUP_ID + "&report_format=PDF&report_detailed=TRUE&val_valuationid=" + sValId;
+
+// this link is to view the pdf on our server
+var sPdfReportUrlLocal = request.contextPath + "/planetpress/output/360-valuation/" + sValId + ".pdf";
+
+//*********************************************************************************************************************************
+// Write the valuation to the queue to be imported to ImageRight
+// Policies will have the report submitted directly
+// Quotes will be submitted to Image right during the quote application submission process, refer to /quoting/property/forms.xsp
+//*********************************************************************************************************************************
+if (sPolicyId != '' && pdfStatus == 0) {
+	// log successful download
+	fPhenix.writeFileNo(sLogFileName, 'Valuation report downloaded successfully. Valuation ID = ' + sValId + ', Quote/policy ID = ' + sPolicyId);
+	// should the report be imported to Image Right now or stored in archive directory
+	var bImportNow = false;
+
+	// if policy id does NOT begin with Q, it's not a quote so import now
+	if (sPolicyId.substring( 0, 1 ) != 'Q') {
+		bImportNow = true;
+	}
+	// else the quote might already be submitted, so check that and if it is already submit, import the report to IR now
+	else {
+		// run task to look for already submitted quotes
+		var tskValQuote = fPhenix.tRunTask("TK_QT_VALID_NUMBER", new Array("QT_NUMBER", "QT_AGENCY"), new Array(sPolicyId, ''));	// QT_SUBMIT parm will be returned without supplying agy id
+		if (tskValQuote.error) {
+			fPhenix.handleTaskError(tskValQuote, new Array("QT_NUMBER", "QT_AGENCY"), new Array(sQuoteId, ''), '', '', false);
+		}
+		else {
+			bImportNow = (tskValQuote.parameters.QT_SUBMIT == 'Y') ? true : false;
+		}
+		//fPhenix.logDebugMsg(bImportNow);
+	}
+	//fPhenix.logDebugMsg(bImportNow);
+	if (bImportNow) {
+		// Write valutation record to queue.txt for ImageRight import
+		var sTrigger = sValId + '|' + 'PLUW_' + sPolicyId + '_15200_IPC_______' + sTown + ',' + sState + ',' + sZip + '___9_28__3___C_0';
+		fPhenix.writeFileNo(sLogFileName, 'Trigger IR import: ' + sTrigger);	// add entry to log file of string that is written to queue file
+		var bSuccess = fPhenix.write360Trigger(sTrigger + '\n');
+		//if the write operation succeeded, return true otherwise return the error string
+		if (bSuccess) { fPhenix.writeFileNo(sLogFileName, 'IR trigger written successfully.'); }
+		else { fPhenix.writeFileNo(sLogFileName, '***** ERROR *****\nIR trigger not written successfully.'); }
+	}
+	//else if (policy == 'commercial') {
+		//var bSuccess = fPhenix.write360Trigger(sValId + '|' + 'CLUW_' + sPolicyId + '_10300_INSP_______' + sTown + ',' + sState + ',' + sZip + '___9_28__3_0');
+	//}
+}
+// else we have a problem, so log something
+else {
+	if (sPolicyId == '') {
+		fPhenix.writeFileNo(sLogFileName, '***** ERROR *****\n Unable to download Valuation report from 360 because policy id could not be located for ' + sValId);
+	}
+	else if (pdfStatus != 0) {
+		fPhenix.writeFileNo(sLogFileName, '***** ERROR *****\n Unable to download Valuation report from 360 server.\nError code = ' + pdfStatus + '.\nCheck Java class to find out what this error code means.');
+	}
+}
+</script>
+
+
+
+<html>
+<head>
+
+<style type="text/css">
+body { background-color:#ffffff; margin:0; padding:0; width:100%; }
+div#topImg { background-color: #000000; }
+
+</style>
+
+</head>
+<body>
+
+<div id="topImg">
+<img src="../images/logo_header_white.gif" /><br />
+<img src="../images/tools.jpg" width="100%" height="140px" /><br />
+</div>
+
+<script runat="server">
+// display a link for the user to view the pdf report or to close the window
+writeln('<p style="text-align:center;">Click <a href="' + sPdfReportUrl + '">here to view</a> the valuation report in PDF format.</p>');
+//writeln('<p style="text-align:center;">Click <a href="' + sPdfReportUrlLocal + '">here to view</a> the valuation report in PDF format.</p>');
+writeln('<p style="text-align:center;">Click <a href="javascript:window.close();">here to close</a> this window.</p>');
+
+</script>
+
+</body>
+</html>
