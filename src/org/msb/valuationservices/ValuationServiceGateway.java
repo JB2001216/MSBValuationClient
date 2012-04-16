@@ -91,13 +91,48 @@ public class ValuationServiceGateway {
         return valuationIn;
     }
 
-    public ValuationInDocument buildMainStreetValuation() throws java.lang.Exception {
+    public ValuationInDocument buildMainStreetValuation(String address1, String city, String stateOrProvince, String zipOrPostalCode, String insFullName, String insAddress1, String insCity, String insStateOrProvince, String insZipOrPostalCode) throws Exception {
+        return buildMainStreetValuation(address1, city, stateOrProvince, zipOrPostalCode, insFullName, insAddress1, insCity, insStateOrProvince, insZipOrPostalCode, null);
+    }
+
+    public ValuationInDocument buildMainStreetValuation(String address1, String city, String stateOrProvince, String zipOrPostalCode, String insFullName, String insAddress1, String insCity, String insStateOrProvince, String insZipOrPostalCode, String policyNumber) throws java.lang.Exception {
 
         ValuationInDocument valuationIn = buildValuation();
 
-        MainStreetValuation mainStreetValuation = valuationIn.getValuationIn().addNewMainStreetValuation();
-        fillOutCalculatableValuation(mainStreetValuation);
-        mainStreetValuation.addNewBuilding();
+        MainStreetValuation valuation = valuationIn.getValuationIn().addNewMainStreetValuation();
+        fillOutCalculatableValuation(valuation);
+        valuation.addNewBuilding();
+
+
+        Address address = Address.Factory.newInstance();
+        address.setAddress1(address1);
+        address.setCity(city);
+        address.setStateOrProvince(stateOrProvince);
+        address.setZipOrPostalCode(zipOrPostalCode);
+
+
+        valuation.setPropertyAddress(address);
+        if (policyNumber == null) {
+            valuation.setRecordType(RecordType.EST);
+        }
+        else {
+            valuation.setRecordType(RecordType.POL);
+            valuation.getValuationIdentifier().setPolicyNumber(policyNumber);
+        }
+
+        InsuredCustomer insured = valuation.getInsuredCustomer();
+        insured.setFullName(insFullName);
+        Address insAddress = Address.Factory.newInstance();
+        insAddress.setAddress1(insAddress1);
+        insAddress.setCity(insCity);
+        insAddress.setStateOrProvince(insStateOrProvince);
+        insAddress.setZipOrPostalCode(insZipOrPostalCode);
+        insured.setMailingAddress(insAddress);
+
+
+
+
+
 
         return valuationIn;
     }

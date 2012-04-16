@@ -68,32 +68,35 @@ public class ValuationServicePortTest extends junit.framework.TestCase {
      */
     public void testcreateValuation() throws java.lang.Exception {
 
-        ValuationServiceGateway gateway = new ValuationServiceGateway("cedarsprings", "c3darsprings", "http://localhost:8080/rmmi/expresslync/ValuationService.asmx");//the default implementation should point to the right endpoint
-        ValuationInDocument valuationIn = gateway.buildMainStreetValuation();
-        //ValuationInDocument valuationIn = gateway.buildHighValueAdvancedValuation();
+        ValuationServiceGateway gateway = new ValuationServiceGateway("cedarsprings", "c3darsprings", "http://rcttest3.msbexpress.net/rmmi/expresslync/ValuationService.asmx");//the default implementation should point to the right endpoint
+        ValuationInDocument valuationIn = gateway.buildMainStreetValuation("124 Main St", "Brunswick", "ME", null, "CST Test3", "124 Main St", "Brunswick", "ME", "04011", "testpol1");
+//        //ValuationInDocument valuationIn = gateway.buildHighValueAdvancedValuation();
+//
+//        MainStreetValuation valuation = valuationIn.getValuationIn().getMainStreetValuation();
+//        //HighValueAdvancedValuation valuation = valuationIn.getValuationIn().getHVAdvancedValuation();
+//        valuation.setPropertyAddress(getAddress());
+//        valuation.setRecordType(RecordType.EST);
+//
+//        InsuredCustomer insured = valuation.getInsuredCustomer();
+//        insured.setFullName("CST Test3");
+//        insured.setMailingAddress(getAddress());
+//
+//        MainstreetBuilding building = valuation.getBuilding();
+//        //HighValueAdvancedBuilding building = valuation.getBuilding();
+//        building.setHomeStyle(HomeStyle.CAPE_COD);
+//        building.setSiteAccess(SiteAccess.FLAT_AREA_EASY_ACCESS_ROADS);
+//
+//        MainstreetSection section = building.addNewSection();
+//        //HighValueAdvancedSection section = building.addNewSection();
+//        section.setNumber((short) 1);
+//        section.setYearBuilt((short) 2005);
+//        section.setContructionType(ConstructionType.STANDARD);
+//        section.setLivingArea(2200);
 
-        MainStreetValuation valuation = valuationIn.getValuationIn().getMainStreetValuation();
-        //HighValueAdvancedValuation valuation = valuationIn.getValuationIn().getHVAdvancedValuation();
-        valuation.setPropertyAddress(getAddress());
-        valuation.setRecordType(RecordType.EST);
-
-        InsuredCustomer insured = valuation.getInsuredCustomer();
-        insured.setFullName("CST Test3");
-        insured.setMailingAddress(getAddress());
-
-        MainstreetBuilding building = valuation.getBuilding();
-        //HighValueAdvancedBuilding building = valuation.getBuilding();
-        building.setHomeStyle(HomeStyle.CAPE_COD);
-        building.setSiteAccess(SiteAccess.FLAT_AREA_EASY_ACCESS_ROADS);
-
-        MainstreetSection section = building.addNewSection();
-        //HighValueAdvancedSection section = building.addNewSection();
-        section.setNumber((short) 1);
-        section.setYearBuilt((short) 2005);
-        section.setContructionType(ConstructionType.STANDARD);
-        section.setLivingArea(2200);
-
-        assertNotNull(gateway.createValuation(valuationIn));
+        final ValuationIdentifierDocument valuationIdentifierDocument = gateway.createValuation(valuationIn);
+        final ValuationIdentifier valuationIdentifier = valuationIdentifierDocument.getValuationIdentifier();
+        String t = valuationIdentifier.getPolicyNumber();
+        assertNotNull(valuationIdentifierDocument);
 
     }
 
