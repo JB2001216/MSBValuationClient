@@ -9,6 +9,8 @@ package org.msb.valuationservices;
 import com.msbinfo.expresslync.rct.valuation.*;
 import com.msbinfo.expresslync.rct.*;
 
+import java.io.File;
+
 /*
  *  ValuationServicePortTest Junit test case
 */
