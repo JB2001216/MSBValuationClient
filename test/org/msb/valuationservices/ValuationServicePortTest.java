@@ -38,12 +38,8 @@ public class ValuationServicePortTest extends junit.framework.TestCase {
     public void testexportValuationRecordId() throws java.lang.Exception {
 
         ValuationServiceGateway gateway = new ValuationServiceGateway("cedarsprings", "c3darsprings", "http://localhost:8080/rmmi/expresslync/ValuationService.asmx");//the default implementation should point to the right endpoint
-
-        RecordIdDocument recordId12 = RecordIdDocument.Factory.newInstance();
-        recordId12.setRecordId(1444173);
-
-        assertNotNull(gateway.exportValuationRecordId(
-                recordId12));
+        final ValuationOutDocument outDocument = gateway.exportValuationRecordId(1444173);
+        assertNotNull(outDocument);
 
 
     }
@@ -58,7 +54,8 @@ public class ValuationServicePortTest extends junit.framework.TestCase {
 
         policyNumber14.setPolicyNumber("ESTIMATE-1444173");
 
-        assertNotNull(gateway.exportValuationPolicyNumber(policyNumber14));
+        final ValuationOutDocument outDocument = gateway.exportValuationPolicyNumber(policyNumber14);
+        assertNotNull(outDocument);
 
 
     }
@@ -102,7 +99,7 @@ public class ValuationServicePortTest extends junit.framework.TestCase {
 
     public void testassignPolicyNumberPolicyNumber() throws java.lang.Exception {
 
-        ValuationServiceGateway gateway = new ValuationServiceGateway("cedarsprings", "c3darsprings", "http://localhost:8080/rmmi/expresslync/ValuationService.asmx");//the default implementation should point to the right endpoint
+        ValuationServiceGateway gateway = new ValuationServiceGateway("cedarsprings", "c3darsprings", "http://rcttest3.msbexpress.net/rmmi/expresslync/ValuationService.asmx");//the default implementation should point to the right endpoint
         PolicyNumberDocument oldPolicyNumber = PolicyNumberDocument.Factory.newInstance();
         NewPolicyNumberDocument newPolicyNumber = NewPolicyNumberDocument.Factory.newInstance();
 

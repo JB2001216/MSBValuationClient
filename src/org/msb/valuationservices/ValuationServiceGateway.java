@@ -60,6 +60,12 @@ public class ValuationServiceGateway {
         return stub.exportValuationVersionId(versionIdDocument);
     }
 
+    public ValuationOutDocument exportValuationRecordId(int recordId) throws Exception {
+        RecordIdDocument recordIdDocument = RecordIdDocument.Factory.newInstance();
+        recordIdDocument.setRecordId(recordId);
+
+        return this.exportValuationRecordId(recordIdDocument);
+    }
     public ValuationOutDocument exportValuationRecordId(RecordIdDocument recordIdDocument) throws java.lang.Exception {
         return stub.exportValuationRecordId(recordIdDocument);
     }
