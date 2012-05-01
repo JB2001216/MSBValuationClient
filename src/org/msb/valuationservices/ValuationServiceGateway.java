@@ -109,6 +109,29 @@ public class ValuationServiceGateway {
         fillOutCalculatableValuation(valuation);
         valuation.addNewBuilding();
 
+        setRequiredInformation(valuation, address1, city, stateOrProvince, zipOrPostalCode, insFullName, insAddress1, insCity, insStateOrProvince, insZipOrPostalCode, policyNumber);
+
+        return valuationIn;
+    }
+
+    public ValuationInDocument buildMMHValuation(String address1, String city, String stateOrProvince, String zipOrPostalCode, String insFullName, String insAddress1, String insCity, String insStateOrProvince, String insZipOrPostalCode) throws Exception {
+        return buildMMHValuation(address1, city, stateOrProvince, zipOrPostalCode, insFullName, insAddress1, insCity, insStateOrProvince, insZipOrPostalCode, null);
+    }
+
+    public ValuationInDocument buildMMHValuation(String address1, String city, String stateOrProvince, String zipOrPostalCode, String insFullName, String insAddress1, String insCity, String insStateOrProvince, String insZipOrPostalCode, String policyNumber) throws java.lang.Exception {
+
+        ValuationInDocument valuationIn = buildValuation();
+
+        MMHValuation mmhValuation = valuationIn.getValuationIn().addNewMMHValuation();
+        fillOutCalculatableValuation(mmhValuation);
+        mmhValuation.addNewBuilding();
+
+        setRequiredInformation(mmhValuation, address1, city, stateOrProvince, zipOrPostalCode, insFullName, insAddress1, insCity, insStateOrProvince, insZipOrPostalCode, policyNumber);
+
+        return valuationIn;
+    }
+
+    public void setRequiredInformation(Valuation valuation, String address1, String city, String stateOrProvince, String zipOrPostalCode, String insFullName, String insAddress1, String insCity, String insStateOrProvince, String insZipOrPostalCode, String policyNumber) throws Exception{
 
         Address address = Address.Factory.newInstance();
         address.setAddress1(address1);
@@ -134,22 +157,6 @@ public class ValuationServiceGateway {
         insAddress.setStateOrProvince(insStateOrProvince);
         insAddress.setZipOrPostalCode(insZipOrPostalCode);
         insured.setMailingAddress(insAddress);
-
-
-
-
-
-
-        return valuationIn;
-    }
-
-    public ValuationInDocument buildMMHValuation() throws java.lang.Exception {
-
-        ValuationInDocument valuationIn = buildValuation();
-        MMHValuation mmhValuation = valuationIn.getValuationIn().addNewMMHValuation();
-        fillOutCalculatableValuation(mmhValuation);
-        mmhValuation.addNewBuilding();
-        return valuationIn;
     }
 
     public ValuationInDocument buildHighValueStandardValuation() throws java.lang.Exception {
