@@ -50,6 +50,9 @@
     <target depends="pre.compile.test" name="compile.src" if="jars.ok">
         <javac debug="on" memoryMaximumSize="256m" memoryInitialSize="256m" fork="true" destdir="${classes}" srcdir="${src}">
             <classpath location="${lib}/${xbeans.packaged.jar.name}"/>
+            <classpath location="${lib}/dbstuff.jar"/>
+            <classpath location="${lib}/ojdbc6.jar"/>
+            <classpath location="${lib}/xdb.jar"/>
             <classpath refid="axis2.class.path"/>
         </javac>
     </target>
