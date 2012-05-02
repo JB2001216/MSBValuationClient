@@ -38,7 +38,6 @@ public class ValuationServicePortTest extends junit.framework.TestCase {
      * Auto generated test method
      */
     public void testexportValuationRecordId() throws java.lang.Exception {
-
         ValuationServiceGateway gateway = new ValuationServiceGateway("cedarsprings", "c3darsprings", "http://localhost:8080/rmmi/expresslync/ValuationService.asmx");//the default implementation should point to the right endpoint
         final ValuationOutDocument outDocument = gateway.exportValuationRecordId(1444173);
         assertNotNull(outDocument);
@@ -51,10 +50,10 @@ public class ValuationServicePortTest extends junit.framework.TestCase {
      */
     public void testexportValuationPolicyNumber() throws java.lang.Exception {
 
-        ValuationServiceGateway gateway = new ValuationServiceGateway("cedarsprings", "c3darsprings", "http://localhost:8080/rmmi/expresslync/ValuationService.asmx");//the default implementation should point to the right endpoint
+        ValuationServiceGateway gateway = new ValuationServiceGateway("cedarsprings", "c3darsprings", "http://rcttest3.msbexpress.net/rmmi/expresslync/ValuationService.asmx");//the default implementation should point to the right endpoint
         PolicyNumberDocument policyNumber14 = PolicyNumberDocument.Factory.newInstance();
 
-        policyNumber14.setPolicyNumber("ESTIMATE-1444173");
+        policyNumber14.setPolicyNumber("QMHtest15");
 
         final ValuationOutDocument outDocument = gateway.exportValuationPolicyNumber(policyNumber14);
         assertNotNull(outDocument);
